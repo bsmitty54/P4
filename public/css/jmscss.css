@@ -1,0 +1,329 @@
+@charset "utf-8";
+/* CSS Document */
+#wrapper{
+  border:solid thin #560753;
+  overflow-x: hidden;
+}
+#topHeader{
+  font-size:28px;
+  text-align:center;
+  color:#560753;
+  font-style:italic;
+  font-weight: bold;
+  font-family:serif;
+  background-color:#f5e8f5;
+  border: solid 1px;
+  border-radius:0px;
+  background-image: url("/images/11_highland_deck_sunset.jpg");
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+}
+
+
+
+#footer{
+  color:#560753;
+  font-style:italic;
+  text-align:center;
+  padding:5px;
+  border-top: solid 1px;
+  background-color:#f5e8f5;
+  border-radius:0px;
+}
+
+#center {
+  background-color:#fff;
+  border-color: #fff;
+  border:none; height: 100%;
+  overflow: auto;
+  border-radius:10px;
+  margin-top: 0px;
+  padding-top: 10px;
+}
+
+#main {
+  border-bottom: solid;
+  height: 100%;
+  overflow:auto;
+  border-radius:0px;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
+#leftgutter {
+  border: none;
+  height: 100%;
+  overflow: auto;
+  background-color:#DFE2F1;
+  border-radius:00px;
+  margin-top: 0px;
+  min-width:160px;
+}
+
+#rightside {
+  border: none;
+  height: 100%;
+  overflow: auto;
+  background-color:#DFE2F1;
+  border-radius:00px;
+  margin-top: 0px;
+}
+
+
+#center img {
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+#maincontent {
+  height: 550px;
+  margin-top: 0px;
+  border-bottom: solid thin;
+  margin-bottom: 0px;
+}
+
+
+figure {
+  text-align: center;
+}
+
+
+p.description {
+  text-align:left;
+}
+
+div.transbox {
+    margin: 0px 30% 0px 30%;
+    background-color: #ffffff;
+    border: solid 3px;
+    opacity: 0.6;
+}
+
+
+
+.showit {display:inline}
+.hideit {display:none}
+
+#main h2, #mainadmin h2 {color:#1210ED; margin: 0px; padding-top:20px; padding-bottom: 10px; font-size:16px; padding-left:10px}
+#leftgutter h2, #leftgutteradmin h2 {
+  color:#1210ED;
+  background-color:#DFE2F1;
+  margin: 0px;
+  padding-top:20px;
+  padding-bottom: 10px;
+  font-size:16px;
+  border: none;
+  padding-left:10px;
+}
+
+
+a {
+	color: #560753;
+}
+
+legend, .pwform  p.legend {
+  color:#560753;
+  font-family: annie-use-your-telescope;
+  font-style: italic;
+  text-align:center;
+  font-size: 21px;
+  line-height: inherit;
+  border: 0;
+  border-bottom: solid thin;
+}
+
+.col-lg-3,
+.col-md-3,
+.col-sm-3 {
+	width: 20%;
+}
+
+.col-sm-push-3 {
+    left: 20%;
+  }
+
+.navbar-nav > li > a {
+
+  line-height: 30px;
+}
+
+.navbar {
+	margin-bottom: 0;
+}
+
+.navbar-brand > img {
+	vertical-align:baseline;
+}
+
+.navbar-collapse {
+	border-color: #560753;
+	background-color: white;
+}
+
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: #D770D7;
+  border-radius:0px;
+  border-right:groove 8px gray;
+  color:white;
+}
+
+.nav-stacked > li > a {
+	border-bottom:none;
+	border-top:none;
+	border-right:none;
+	border-top:none;
+	margin:0px;
+}
+
+.nav > li > a {
+  padding: 10px 8px;
+}
+
+.nav-stacked > li > a:hover,
+.nav-stacked > li > a:focus {
+	border-bottom:hidden white;
+	border-top: hidden white;
+	border-right: groove 8px gray;
+  border-radius: 10px;
+	margin:0px;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color:#1210ED;
+  border-right: hidden white;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color:white;
+  background-color:#1210ED;
+  border-right: groove 8px gray;
+  border-radius:0px;
+}
+
+.navbar-default .navbar-nav > .active > a {
+ color:#1210ED;
+ background-color:#D5D9F9;
+ border-top:hidden white;
+ border-right:hidden white;
+ border-radius:0px;
+}
+
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color:white;
+  background-color:#1210ED;
+  border-right:groove 8px gray;
+ border-radius:0px;
+}
+.navbar-default .navbar-nav > .disabled > a,
+.navbar-default .navbar-nav > .disabled > a:hover,
+.navbar-default .navbar-nav > .disabled > a:focus {
+  color:white;
+  background-color:#560753;
+  border-top:hidden white;
+ border-right:hidden white;
+ border-radius:0px;
+}
+
+legend {color:#560753; font-family: annie-use-your-telescope; font-style: italic; text-align:center}
+
+.pwform {
+
+    width: 700px;
+    background: white;
+    margin: 5px;
+    margin-left: 50px;
+    padding: 5px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    -webkit-box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 1);
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 1);
+
+}
+
+.pwform label {
+    text-align: right;
+
+    margin: 5px 5px 5px 30px;
+    width: 250px;
+	color:#560753;
+
+}
+
+.pwform span {
+    text-align: right;
+    margin: 5px 5px 5px 30px;
+    width: 100px;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 0px;
+    font-weight: 700;
+	color:#560753;
+
+}
+
+.pwform span.errormsg {
+  text-align: left;
+  margin: 5px 5px 5px 5px;
+  width: 350px;
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 0px;
+  font-weight: 300;
+  color: red;
+}
+
+.pwform input, .pwform select, .pwform input[type="file"] {
+	background-color: #DEE5F7;
+	color: black;
+	font-style: italic;
+	border: 2px inset;
+	line-height: 20px;
+	height: 24px;
+	display: inline;
+
+}
+
+input[type="checkbox"], input[type="radio"] {
+   width: 18px;
+   height: 18px;
+   vertical-align: top;
+}
+
+div.pword {
+  margin-left: 20px;
+  font-size:18px;
+  color:#560753;
+  font-weight: bold;
+  font-family:serif;
+}
+
+div a.home {
+    text-align: center;
+    display: block;
+
+    width: 80%;
+}
+
+p a.toollink {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 1.5em;
+}
+
+img.screenshot {
+  float: right;
+  margin: 0px 0px 0px 0px !important;
+  text-align: right !important;
+  vertical-align: bottom !important;
+}
+
+p.desc {
+  margin-left: 20px;
+  color: blue;
+}
