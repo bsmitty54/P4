@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Joe's Sales Tracker
+    Product Maintenance
 @stop
 
 
@@ -15,16 +15,24 @@ such as a page specific styesheets.
 @stop
 
 
-
 @section('content')
-<br>
-<h1>Joe's Sales Tracker Application - Home Page</h1>
-<br>
-<hr>
-<p>
-    Welcome to the Sales Tracker!  Use the navigation Menu on the left to
-    maintain the product catalog, add or update information for salespeople, and to log and view sales transactions.
-<hr>
+<form method="POST" action="{{URL::to('/products')}}">
+  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+  <fieldset>
+    <div class='pwform'>
+    <p class="legend">Maintain Products Catalog</p>
+      <div class='field'>
+
+      </div>
+
+
+      <br><br><label for="submit">&nbsp;</label>
+      <button type="submit" id="submit" class="btn btn-primary">Save</button>
+    </div>
+
+  </fieldset>
+</form>
+
 
 @stop
 

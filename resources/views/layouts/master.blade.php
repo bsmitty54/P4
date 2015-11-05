@@ -24,7 +24,7 @@
       <div id="topHeader" class="">
 
       	<div class="transbox">
-      		@yield('title','Joes Toolbox')
+      		@yield('title','Joes Sales Tracker App')
         </div>
 
       </div>
@@ -36,7 +36,11 @@
             <ul class="nav nav-stacked">
 
               <li><a class="" href="http://p1.jsmitty54php.com">Back to Portfolio Page</a></li>
-              
+              <li><a class="" href="{{URL::to('/')}}">Home</a></li>
+              <li><a class="" href="{{ action("SalesTransactionController@getIndex") }}">Maintain Sales Transactions</a></li>
+              <li><a class="" href="{{ action("ProductController@getIndex") }}">Maintain Sales Product Catalog</a></li>
+              <li><a class="" href="{{ action("SalespeopleController@getIndex") }}">Maintain Sales People</a></li>
+
             </ul>
         </div>
 
