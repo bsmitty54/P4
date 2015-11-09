@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
     <link href="/css/jmscss.css" type='text/css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
 
@@ -38,7 +39,7 @@
               <li><a class="" href="http://p1.jsmitty54php.com">Back to Portfolio Page</a></li>
               <li><a class="" href="{{URL::to('/')}}">Home</a></li>
               <li><a class="" href="{{ action("SalesTransactionController@getIndex") }}">Maintain Sales Transactions</a></li>
-              <li><a class="" href="{{ action("ProductController@getIndex") }}">Maintain Sales Product Catalog</a></li>
+              <li><a class="" href="{{ action("ProductController@getIndex",['sortOrder' => 'Product Name']) }}">Maintain Product Catalog</a></li>
               <li><a class="" href="{{ action("SalespeopleController@getIndex") }}">Maintain Sales People</a></li>
 
             </ul>

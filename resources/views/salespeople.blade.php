@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Salespeople Maintenance
+    Joe's Sales Tracker
 @stop
 
 
@@ -17,22 +17,52 @@ such as a page specific styesheets.
 
 
 @section('content')
-<form method="POST" action="{{URL::to('/salespeople')}}">
-  <input type="hidden" name="_token" value="{{ csrf_token() }}">
-  <fieldset>
-    <div class='pwform'>
-    <p class="legend">Maintain Salespeople Master File</p>
-      <div class='field'>
+<div class="tablecap">
+    <h1>Salespeople Maintenance</h1>
+    <br>
+    <span class="button"><a href="">Add New Salesperson</a></span>
+    <span class="button"><a href="">Filter Salespeople</a></span>
 
-      </div>
+    <br>
+</div>
+<div class="tablelist">
+    <br>
+    <table class="masterlist">
+        <tr>
 
+            <th><a href="{{ action("SalespeopleController@getIndex",['sortOrder' => 'Employee ID']) }}">Employee ID</a></th>
+            <th><a href="{{ action("SalespeopleController@getIndex",['sortOrder' => 'Name']) }}">Name</a></th>
+            <th><a href="{{ action("SalespeopleController@getIndex",['sortOrder' => 'Address']) }}">Address</a></th>
+            <th>Email</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+        @foreach ($salespeople as $salesperson)
+            <tr>
+                <td>{{ $salesperson->employee_id }}</td>
+                <td>{{ $salesperson->last_name }},{{ $salesperson->first_name }}</td>
+                <td>
+                    {{ $salesperson->street1 }}<br>
+                    {{ $salesperson->city }},{{ $salesperson->state }}&nbsp;{{ $salesperson->zip_code }}
+                </td>
 
-      <br><br><label for="submit">&nbsp;</label>
-      <button type="submit" id="submit" class="btn btn-primary">Save</button>
-    </div>
-
-  </fieldset>
-</form>
+                <td>{{ $salesperson->email }}</td>
+                <td>
+                    @if (is_null($salesperson->termination_date) || ($salesperson->termination_date == '') ||($salesperson->termination_date == '0000-00-00'))
+                        Yes
+                    @else
+                        No
+                    @endif
+                </td>
+                <td>&nbsp;&nbsp;
+                    <a href="#"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="#"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                </td>
+            </tr>
+        @endforeach
+    </table>
+</div>
 
 
 @stop

@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/products', 'ProductController@getIndex');
+Route::get('/products/{sortOrder}', ['uses' =>'ProductController@getIndex']);
 Route::post('/products', 'ProductController@postIndex');
-Route::get('/salespeople', 'SalespeopleController@getIndex');
+Route::get('/salespeople/{sortOrder}', ['uses' => 'SalespeopleController@getIndex']);
 Route::post('/salespeople', 'SalespeopleController@postIndex');
 Route::get('/salestx', 'SalesTransactionController@getIndex');
 Route::post('/salestx', 'SalesTransactionController@postIndex');
