@@ -36,11 +36,11 @@
           <h2>Menu</h2>
             <ul class="nav nav-stacked">
 
-              <li><a class="" href="http://p1.jsmitty54php.com">Back to Portfolio Page</a></li>
-              <li><a class="" href="{{URL::to('/')}}">Home</a></li>
-              <li><a class="" href="{{ action("SalesTransactionController@getIndex") }}">Maintain Sales Transactions</a></li>
-              <li><a class="" href="{{ action("ProductController@getIndex",['sortOrder' => 'Product Name']) }}">Maintain Product Catalog</a></li>
-              <li><a class="" href="{{ action("SalespeopleController@getIndex") }}">Maintain Sales People</a></li>
+              <li><a class="" href="http://p1.jsmitty54php.com"><i class="fa fa-picture-o"></i>&nbsp;Back to Portfolio Page</a></li>
+              <li><a class="" href="{{URL::to('/')}}"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+              <li><a class="" href="{{ action("SalesTransactionController@getIndex") }}"><i class="fa fa-money"></i>&nbsp;Maintain Sales Transactions</a></li>
+              <li><a class="" href="{{ action("ProductController@getIndex",['sortOrder' => 'Product Name']) }}"><i class="fa fa-tags"></i>&nbsp;Maintain Product Catalog</a></li>
+              <li><a class="" href="{{ action("SalespeopleController@getIndex") }}"><i class="fa fa-user"></i>&nbsp;Maintain Sales People</a></li>
 
             </ul>
         </div>

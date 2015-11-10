@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Joe's Sales Tracker
+    <i class="fa fa-money"></i>&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;<i class="fa fa-money"></i>
 @stop
 
 
@@ -18,10 +18,19 @@ such as a page specific styesheets.
 @section('content')
 <div class="tablecap">
     <h1>Product Maintenance</h1>
-    <br>
-    <span class="button"><a href="">Add New Product</a></span>
-    <span class="button"><a href="">Filter Product List</a></span>
 
+    <?php
+    if (Session::has('message')) {
+        echo '<span class="msg">';
+        echo Session::get('message');
+        echo '</span>';
+        echo '<br>';
+    }
+    ?>
+
+    <br>
+    <a class="button" href="{{ URL::to('/productedit/New/Add') }}"><i class="fa fa-plus"></i>&nbsp;Add New Product</a>
+    <a class="button" href=""><i class="fa fa-filter"></i>&nbsp;Filter Products List</a>
     <br>
 </div>
 <div class="tablelist">
@@ -49,9 +58,9 @@ such as a page specific styesheets.
                     @endif
                 </td>
                 <td>&nbsp;&nbsp;
-                    <a href="#"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a>
+                    <a href="{{ URL::to('/productedit') }}/{{ $product->id}}/Edit"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="#"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                    <a href="{{ URL::to('/productedit') }}/{{ $product->id}}/Delete"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
                 </td>
             </tr>
         @endforeach

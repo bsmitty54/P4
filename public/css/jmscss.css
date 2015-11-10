@@ -14,7 +14,7 @@
   background-color:#f5e8f5;
   border: solid 1px;
   border-radius:0px;
-  background-image: url("/images/11_highland_deck_sunset.jpg");
+
   background-repeat: repeat-x;
   background-size: auto 100%;
 }
@@ -95,7 +95,7 @@ p.description {
 div.transbox {
     margin: 0px 30% 0px 30%;
     background-color: #ffffff;
-    border: solid 3px;
+    border: solid 0px;
     opacity: 0.6;
 }
 
@@ -331,13 +331,13 @@ p.desc {
 div.tablelist th {
     border: solid black 1px;
     background-color: #DDFFFF;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 5px 0px 5px;
 }
 
 div.tablelist td {
     border: solid black 1px;
     color:#1210ED;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 5px 0px 5px;
 }
 
 .masterlist {
@@ -359,13 +359,29 @@ div.tablelist td {
 }
 
 .button {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
     background: #D5D9F9;
-    padding: 10px;
+    height: 40px;
+    width: 200px;
+    text-align: center;
+    vertical-align:bottom;
+    padding: 10px 0 0 0;
     border-radius: 5px;
 }
 
 .button a:hover {
     color: blue;
+}
+
+.formbutton {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    padding: 6px 20px 8px 20px;
+    border-radius: 4px;
+    display: inline-block;
 }
 
 a.tooltip{
@@ -404,4 +420,9 @@ a.tooltip:hover::after {
     white-space:nowrap;
     top:17px;
     left: 0px;
+}
+
+span.msg {
+    color: red;
+    font-style: italic;
 }

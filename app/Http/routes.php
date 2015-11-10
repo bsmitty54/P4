@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('/products/{sortOrder}', ['uses' =>'ProductController@getIndex']);
 Route::post('/products', 'ProductController@postIndex');
+Route::get('/productedit/{pid}/{mode}', 'ProducteditController@getIndex');
+Route::post('/productedit/{pid}/{mode}', 'ProducteditController@postIndex');
 Route::get('/salespeople/{sortOrder}', ['uses' => 'SalespeopleController@getIndex']);
 Route::post('/salespeople', 'SalespeopleController@postIndex');
 Route::get('/salestx', 'SalesTransactionController@getIndex');

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Joe's Sales Tracker
+    <i class="fa fa-money"></i>&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;<i class="fa fa-money"></i>
 @stop
 
 
@@ -20,9 +20,8 @@ such as a page specific styesheets.
 <div class="tablecap">
     <h1>Salespeople Maintenance</h1>
     <br>
-    <span class="button"><a href="">Add New Salesperson</a></span>
-    <span class="button"><a href="">Filter Salespeople</a></span>
-
+    <a class="button" href=""><i class="fa fa-plus"></i>&nbsp;Add New Salesperson</a>
+    <a class="button" href=""><i class="fa fa-filter"></i>&nbsp;Filter Salespeople</a>
     <br>
 </div>
 <div class="tablelist">
