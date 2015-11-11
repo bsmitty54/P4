@@ -15,12 +15,16 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/products/{sortOrder}', ['uses' =>'ProductController@getIndex']);
+Route::get('/products', ['uses' =>'ProductController@getIndex']);
 Route::post('/products', 'ProductController@postIndex');
+Route::get('/products/sort/{column}', 'ProductController@sortProducts');
 Route::get('/productedit/{pid}/{mode}', 'ProducteditController@getIndex');
 Route::post('/productedit/{pid}/{mode}', 'ProducteditController@postIndex');
-Route::get('/salespeople/{sortOrder}', ['uses' => 'SalespeopleController@getIndex']);
-Route::post('/salespeople', 'SalespeopleController@postIndex');
+Route::get('/salespeople', ['uses' => 'SalespersonController@getIndex']);
+Route::post('/salespeople', 'SalespersonController@postIndex');
+Route::get('/salespeople/sort/{column}', 'SalespersonController@sortSalespeople');
+Route::get('/salespersonedit/{sid}/{mode}', 'SalespersoneditController@getIndex');
+Route::post('/salespersonedit/{sid}/{mode}', 'SalespersoneditController@postIndex');
 Route::get('/salestx', 'SalesTransactionController@getIndex');
 Route::post('/salestx', 'SalesTransactionController@postIndex');
 

@@ -95,7 +95,8 @@ p.description {
 div.transbox {
     margin: 0px 30% 0px 30%;
     background-color: #ffffff;
-    border: solid 0px;
+    border-left: solid 1px;
+    border-right: solid 1px;
     opacity: 0.6;
 }
 
@@ -163,10 +164,8 @@ legend, .pwform  p.legend {
 
 .nav > li > a:hover,
 .nav > li > a:focus {
-  text-decoration: none;
-  background-color: #D770D7;
-  border-radius:0px;
-  border-right:groove 8px gray;
+  background:#337ab7;
+  border-radius:10px;
   color:white;
 }
 
@@ -184,11 +183,7 @@ legend, .pwform  p.legend {
 
 .nav-stacked > li > a:hover,
 .nav-stacked > li > a:focus {
-	border-bottom:hidden white;
-	border-top: hidden white;
-	border-right: groove 8px gray;
-  border-radius: 10px;
-	margin:0px;
+
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -232,7 +227,7 @@ legend {color:#560753; font-family: annie-use-your-telescope; font-style: italic
 
 .pwform {
 
-    width: 700px;
+    width: 800px;
     background: white;
     margin: 5px;
     margin-left: 50px;
@@ -249,10 +244,17 @@ legend {color:#560753; font-family: annie-use-your-telescope; font-style: italic
 .pwform label {
     text-align: right;
 
-    margin: 5px 5px 5px 30px;
-    width: 250px;
+    margin: 5px 5px 5px 25px;
+    width: 200px;
 	color:#560753;
 
+}
+
+.pwform label.secondary {
+    text-align: left;
+    width:auto;
+    margin: 0px 0px 0px 0px;
+    color:#560753;
 }
 
 .pwform span {
@@ -362,7 +364,8 @@ div.tablelist td {
     float: left;
     margin-right: 10px;
     margin-bottom: 10px;
-    background: #D5D9F9;
+    background: #337ab7;
+    color: white;
     height: 40px;
     width: 200px;
     text-align: center;
@@ -371,8 +374,10 @@ div.tablelist td {
     border-radius: 5px;
 }
 
-.button a:hover {
-    color: blue;
+a.button:hover {
+    color: white;
+    background-color: #004890;
+    text-decoration: none;
 }
 
 .formbutton {
@@ -383,6 +388,21 @@ div.tablelist td {
     border-radius: 4px;
     display: inline-block;
 }
+
+.formbutton:hover {
+    color: white;
+    background-color: #004890;
+    border-color: #2e6da4;
+    padding: 6px 20px 8px 20px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+a.formbutton:hover {
+    text-decoration: none;
+}
+
+#337ab7
 
 a.tooltip{
     position:relative;
@@ -425,4 +445,8 @@ a.tooltip:hover::after {
 span.msg {
     color: red;
     font-style: italic;
+}
+
+.fa-money {
+    color: green;
 }

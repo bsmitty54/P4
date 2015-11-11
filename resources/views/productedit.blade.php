@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    <i class="fa fa-money"></i>&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;<i class="fa fa-money"></i>
+    <i class="fa fa-money"></i>&nbsp;&nbsp;&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-money"></i>
 @stop
 
 
@@ -53,8 +53,14 @@ such as a page specific styesheets.
 
 
         <br><br><label for="submit">&nbsp;</label>
-        <a class="formbutton" title="Back" alt="Back" href="{{URL::to('/products/Name')}}">Cancel</a>
-        <button type="submit" id="submit" class="btn btn-primary">Save</button>
+        <a class="formbutton" title="Back" alt="Back" href="{{URL::to('/products')}}">Cancel</a>
+        <button type="submit" id="submit" class="btn btn-primary">
+            @if ($mode == 'Delete')
+                DELETE (permanent!)
+            @else
+                Save
+            @endif
+        </button>
     </div>
 
   </fieldset>

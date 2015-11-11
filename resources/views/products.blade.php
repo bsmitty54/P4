@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    <i class="fa fa-money"></i>&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;<i class="fa fa-money"></i>
+    <i class="fa fa-money"></i>&nbsp;&nbsp;&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-money"></i>
 @stop
 
 
@@ -37,10 +37,10 @@ such as a page specific styesheets.
     <br>
     <table class="masterlist">
         <tr>
-            <th><a href="{{ action("ProductController@getIndex",['sortOrder' => 'Product ID']) }}">Product ID</a></th>
-            <th><a href="{{ action("ProductController@getIndex",['sortOrder' => 'Product Name']) }}">Product Name</a></th>
-            <th><a href="{{ action("ProductController@getIndex",['sortOrder' => 'Price']) }}">Price</a></th>
-            <th><a href="{{ action("ProductController@getIndex",['sortOrder' => 'Max Discount']) }}">Discount</a></th>
+            <th><a href="{{ action("ProductController@sortProducts",['column' => 'product_id']) }}">Product ID</a></th>
+            <th><a href="{{ action("ProductController@sortProducts",['column' => 'product_name']) }}">Product Name</a></th>
+            <th><a href="{{ action("ProductController@sortProducts",['column' => 'price']) }}">Price</a></th>
+            <th><a href="{{ action("ProductController@sortProducts",['column' => 'max_discount']) }}">Discount</a></th>
             <th>Active</th>
             <th>Actions</th>
         </tr>

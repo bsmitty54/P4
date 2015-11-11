@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    <i class="fa fa-money"></i>&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;<i class="fa fa-money"></i>
+    <i class="fa fa-money"></i>&nbsp;&nbsp;&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-money"></i>
 @stop
 
 
@@ -19,8 +19,18 @@ such as a page specific styesheets.
 @section('content')
 <div class="tablecap">
     <h1>Salespeople Maintenance</h1>
+
+    <?php
+    if (Session::has('message')) {
+        echo '<span class="msg">';
+        echo Session::get('message');
+        echo '</span>';
+        echo '<br>';
+    }
+    ?>
+
     <br>
-    <a class="button" href=""><i class="fa fa-plus"></i>&nbsp;Add New Salesperson</a>
+    <a class="button" href="{{ URL::to('/salespersonedit/New/Add') }}"><i class="fa fa-plus"></i>&nbsp;Add New Salesperson</a>
     <a class="button" href=""><i class="fa fa-filter"></i>&nbsp;Filter Salespeople</a>
     <br>
 </div>
@@ -29,9 +39,9 @@ such as a page specific styesheets.
     <table class="masterlist">
         <tr>
 
-            <th><a href="{{ action("SalespeopleController@getIndex",['sortOrder' => 'Employee ID']) }}">Employee ID</a></th>
-            <th><a href="{{ action("SalespeopleController@getIndex",['sortOrder' => 'Name']) }}">Name</a></th>
-            <th><a href="{{ action("SalespeopleController@getIndex",['sortOrder' => 'Address']) }}">Address</a></th>
+            <th><a href="{{ action("SalespersonController@sortSalespeople",['column' => 'employee_id']) }}">Employee ID</a></th>
+            <th><a href="{{ action("SalespersonController@sortSalespeople",['column' => 'last_name']) }}">Name</a></th>
+            <th><a href="{{ action("SalespersonController@sortSalespeople",['column' => 'city']) }}">Address</a></th>
             <th>Email</th>
             <th>Active</th>
             <th>Actions</th>
@@ -54,9 +64,9 @@ such as a page specific styesheets.
                     @endif
                 </td>
                 <td>&nbsp;&nbsp;
-                    <a href="#"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a>
+                    <a href="{{ URL::to('/salespersonedit') }}/{{ $salesperson->id}}/Edit"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="#"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                    <a href="{{ URL::to('/salespersonedit') }}/{{ $salesperson->id}}/Delete"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
                 </td>
             </tr>
         @endforeach

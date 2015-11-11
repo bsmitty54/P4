@@ -62,7 +62,15 @@ class ProducteditController extends Controller {
             $product->save();
             $request->session()->flash('message', 'Product ID ' . $product->product_id . ' Updated / Added');
         }
-
-        return redirect('products/Name');
+        $pcol = $request->session()->get('pcol');
+        $pord = $request->session()->get('pord');
+        $pord = ($pord == 'A' ? 'D' : 'A');
+        $request->session()->put('pord',$pord);
+        // need to refresh the products collection after changes
+        $products = \App\Product::orderBy('product_name')->get();
+        // now put the collection in the session variable
+        $request->session()->put('products',$products);
+        // now direct to the sort route to retain the sort the user had before editing
+        return redirect('products/sort/' . $pcol);
     }
 }
