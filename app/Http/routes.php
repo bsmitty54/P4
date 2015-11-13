@@ -25,9 +25,11 @@ Route::post('/salespeople', 'SalespersonController@postIndex');
 Route::get('/salespeople/sort/{column}', 'SalespersonController@sortSalespeople');
 Route::get('/salespersonedit/{sid}/{mode}', 'SalespersoneditController@getIndex');
 Route::post('/salespersonedit/{sid}/{mode}', 'SalespersoneditController@postIndex');
-Route::get('/salestx', 'SalesTransactionController@getIndex');
-Route::post('/salestx', 'SalesTransactionController@postIndex');
-
+Route::get('/salestransaction', 'SalesTransactionController@getIndex');
+Route::post('/salestransaction', 'SalesTransactionController@postIndex');
+Route::get('/salestransaction/sort/{column}', 'SalesTransactionController@sortSalestransactions');
+Route::get('/salestransactionedit/{sid}/{mode}', 'SalestransactioneditController@getIndex');
+Route::post('/salestransactionedit/{sid}/{mode}', 'SalestransactionediteditController@postIndex');
 Route::get('/debug', function() {
 
     echo '<pre>';

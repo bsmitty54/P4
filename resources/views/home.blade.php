@@ -20,11 +20,11 @@ such as a page specific styesheets.
 <br>
 <h1>Joe's Sales Tracker Application - Home Page</h1>
 <br>
-<hr>
+<hr class="homepage">
 <p>
     Welcome to the Sales Tracker!  Use the navigation Menu on the left to
     maintain the product catalog, add or update information for salespeople, and to log and view sales transactions.
-<hr>
+<hr class="homepage">
 
 @stop
 
