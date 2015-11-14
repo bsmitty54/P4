@@ -40,27 +40,29 @@ such as a page specific styesheets.
         <tr>
 
             <th><a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'transaction_date']) }}">Sale Date</a></th>
-            <th><a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'product_id']) }}">Product ID</a></th>
-            <th><a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'product_name']) }}">Product Name</a></th>
-            <th><a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'salesperson_name']) }}">Salesperson</a></th>
+            <th>
+            <a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'product_name']) }}">Product Name /</a>
+            <br>
+            <a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'product_id']) }}">Product ID</a>
+            </th>
+            <th><a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'salesperson_name']) }}">Salesperson /<br> Employee ID</a></th>
             <th>Qty</th>
-            <th>Price</th>
-            <th>Discount</th>
+            <th>Price/<br>Discount</th>
             <th><a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'total']) }}">Sale Total $</a></th>
             <th>Actions</th>
         </tr>
         @foreach ($salestransactions as $salestransaction)
             <tr>
                 <td>{{ $salestransaction->transaction_date }}</td>
-                <td>{{ $salestransaction->product->product_id}}</td>
-                <td>{{ $salestransaction->product->product_name}}</td>
-                <td>{{ $salestransaction->salesperson->last_name . ', ' . $salestransaction->salesperson->first_name}}</td>
-                <td class="rj">{{ $salestransaction->quantity }}</td>
-                <td class="rj">{{ $salestransaction->product->price}}</td>
-                <td class="rj">{{ $salestransaction->discount }}% </td>
+                <td>{{ $salestransaction->product->product_name}}<br>({{ $salestransaction->product->product_id}})</td>
+                <td>{{ $salestransaction->salesperson->last_name . ', ' . $salestransaction->salesperson->first_name}}<br>({{$salestransaction->salesperson->employee_id}})</td>
+                <td class="rj">{{ number_format($salestransaction->quantity,0,'.',',') }}</td>
+                <td class="rj">{{ $salestransaction->product->price}}<br>({{ $salestransaction->discount }}%) </td>
+
                 <?php
 
                     $tot = $salestransaction->quantity * $salestransaction->product->price;
+                    $tot = $tot * ((100 - $salestransaction->discount) / 100);
                     $tot = number_format($tot,2,'.',',');
                 ?>
                 <td class="rj">{{ $tot }}</td>

@@ -72,14 +72,14 @@ class SalesTransactionController extends Controller {
                      return $salestransactions->product->product_name . ' ' . $salestransactions->transaction_date;
                  });
              }
-         } elseif ($column == 'tot') {
+         } elseif ($column == 'total') {
              if ($ord == 'A') {
                  $salestransactions = $salestransactions->sortBy(function($salestransactions) {
-                     return number_format($salestransaction->quantity * $salestransaction->product->price,2,'.',',');
+                     return $salestransactions->quantity * $salestransactions->product->price;
                  });
              } else {
                  $salestransactions = $salestransactions->sortByDesc(function($salestransactions) {
-                     return number_format($salestransaction->quantity * $salestransaction->product->price,2,'.',',');
+                     return $salestransactions->quantity * $salestransactions->product->price;
                  });
              }
          } else {

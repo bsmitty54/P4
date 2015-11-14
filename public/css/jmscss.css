@@ -269,6 +269,11 @@ legend {color:#560753; font-family: annie-use-your-telescope; font-style: italic
 
 }
 
+.pwform span.discount {
+    width: 300px;
+    text-align: left;
+}
+
 .pwform span.errormsg {
   text-align: left;
   margin: 5px 5px 5px 5px;
@@ -332,6 +337,7 @@ p.desc {
 
 div.tablelist th {
     border: solid black 1px;
+    text-align: center;
     background-color: #DDFFFF;
     padding: 0px 5px 0px 5px;
 }
@@ -457,4 +463,8 @@ span.msg {
 
 hr.homepage {
     border-top: 2px solid blue;
+}
+
+div.filters {
+    display: none;
 }

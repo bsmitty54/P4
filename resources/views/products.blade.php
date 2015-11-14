@@ -16,6 +16,7 @@ such as a page specific styesheets.
 
 
 @section('content')
+
 <div class="tablecap">
     <h1>Product Maintenance</h1>
 
@@ -30,9 +31,21 @@ such as a page specific styesheets.
 
     <br>
     <a class="button" href="{{ URL::to('/productedit/New/Add') }}"><i class="fa fa-plus"></i>&nbsp;Add New Product</a>
-    <a class="button" href=""><i class="fa fa-filter"></i>&nbsp;Filter Products List</a>
+    <a class="button showfilter" onclick="showfilters()" href="#"><i class="fa fa-filter"></i>&nbsp;Filter Products List</a>
     <br>
 </div>
+
+<div class="filters">
+    <br>
+    <hr class="homepage">
+    <form method="post" class="filterform" action="#">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <a class="formbutton" onclick="hidefilters()" title="Back" alt="Back" href="">Cancel</a>
+        <button onclick="hidefilters()" type="submit" id="submit" class="btn btn-primary showfilter">Apply</button>
+    </form>
+    <hr class="homepage">
+</div>
+
 <div class="tablelist">
     <br>
     <table class="masterlist">
