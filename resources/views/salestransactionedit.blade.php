@@ -46,7 +46,11 @@ such as a page specific styesheets.
         <div class="field">
             <label for='product'>Product:</label>
             {{-- first load the product list --}}
-            <?php $productlist = \App\Product::orderBy('product_name')->get(); ?>
+            @if ($mode == 'Add')
+                <?php $productlist = \App\Product::orderBy('product_name')->where('active','=','1')->get(); ?>
+            @else
+                <?php $productlist = \App\Product::orderBy('product_name')->get(); ?>
+            @endif
             {{-- loop through the product list and add to the dropdown --}}
             <select id="product" name="product" required onchange="updateDiscount()">
                 <option value="" disc="0">Select a Product</option>
@@ -61,10 +65,17 @@ such as a page specific styesheets.
             {{-- first load the salesperson list --}}
             <?php $salespersonlist = \App\Salesperson::orderBy('last_name')->orderBy('first_name')->orderBy('employee_id')->get(); ?>
             {{-- loop through the salesperson list and add to the dropdown --}}
-            <select id="salesperson" name="salesperson" required>
+            <select id="salesperson" name="salesperson" required onchange="updateMaxDate()">
                 <option value="" selected>Select a Salesperson</option>
                 @foreach ($salespersonlist as $salesperson)
-                    <option value="{{ $salesperson->id }}">{{ $salesperson->last_name }}, {{ $salesperson->first_name }} ({{ $product->product_id }})</option>
+                    <?php
+                        if (is_null($salesperson->termination_date) || ($salesperson->termination_date == '')) {
+                        $tdate = '2099=12=31';
+                            } else {
+                                $tdate = $salesperson->termination_date;
+                            }
+                    ?>
+                    <option value="{{ $salesperson->id }}" tdate="{{ $tdate }}">{{ $salesperson->last_name }}, {{ $salesperson->first_name }} ({{ $product->product_id }})</option>
                 @endforeach
             </select>
         </div>
@@ -81,7 +92,7 @@ such as a page specific styesheets.
         </div>
         <div class="field">
             <label for='comments'>Comments:</label>
-            <input type="text" class="comments" id="comments" name="comments" placeholder="Comments" size="50" maxlength="255" value="{{ $salestransaction->comments }}" {{ $mode == 'Delete' ? 'readonly':''}}>
+            <textarea rows="5" cols="60" class="comments" id="comments" name="comments" placeholder="Comments" size="50" maxlength="255" value="{{ $salestransaction->comments }}" {{ $mode == 'Delete' ? 'readonly':''}}>{{ $salestransaction->comments }}</textarea>
         </div>
         <br>
 

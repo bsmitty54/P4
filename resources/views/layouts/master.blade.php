@@ -17,7 +17,11 @@
 
     {{-- Yield any page specific CSS files or anything else you might want in the <head> --}}
     @yield('head')
-
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
 </head>
 <body>
   <div id="wrapper" class="container-fluid">
@@ -26,6 +30,7 @@
       <div id="topHeader" class="">
 
       	<div class="transbox">
+
       		@yield('title','Joes Sales Tracker App')
         </div>
 
@@ -33,7 +38,7 @@
     </div>
     <div id="maincontent" class="row">
 
-        <div id="leftgutter" class="col-sm-3">
+        <div id="leftgutter" class="col-sm-2">
           <h2>Menu</h2>
             <ul class="nav nav-stacked">
 
@@ -47,7 +52,8 @@
         </div>
 
 
-        <div id="center" class="col-sm-9">
+        <div id="center" class="col-sm-10">
+
           {{-- Main page content will be yielded here --}}
           @yield('content')
         </div>

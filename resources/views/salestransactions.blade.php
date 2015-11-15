@@ -37,27 +37,34 @@ such as a page specific styesheets.
 <div class="tablelist">
     <br>
     <table class="masterlist">
+
         <tr>
 
-            <th><a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'transaction_date']) }}">Sale Date</a></th>
-            <th>
+            <th width="10%"><a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'transaction_date']) }}">Sale Date</a></th>
+            <th width="25%">
             <a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'product_name']) }}">Product Name /</a>
             <br>
             <a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'product_id']) }}">Product ID</a>
             </th>
-            <th><a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'salesperson_name']) }}">Salesperson /<br> Employee ID</a></th>
-            <th>Qty</th>
-            <th>Price/<br>Discount</th>
-            <th><a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'total']) }}">Sale Total $</a></th>
-            <th>Actions</th>
+            <th width="25%"><a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'salesperson_name']) }}">Salesperson /<br> Employee ID</a></th>
+            <th width="10%">Qty</th>
+            <th width="10%">Price/<br>Discount</th>
+            <th width="10%"><a href="{{ action("SalesTransactionController@sortSalestransactions",['column' => 'total']) }}">Sale Total $</a></th>
+            <th width="10%">Actions</th>
         </tr>
+
+    </table>
+</div>
+<div class="tablelist">
+    <table class="masterlist">
+    </tbody>
         @foreach ($salestransactions as $salestransaction)
             <tr>
-                <td>{{ $salestransaction->transaction_date }}</td>
-                <td>{{ $salestransaction->product->product_name}}<br>({{ $salestransaction->product->product_id}})</td>
-                <td>{{ $salestransaction->salesperson->last_name . ', ' . $salestransaction->salesperson->first_name}}<br>({{$salestransaction->salesperson->employee_id}})</td>
-                <td class="rj">{{ number_format($salestransaction->quantity,0,'.',',') }}</td>
-                <td class="rj">{{ $salestransaction->product->price}}<br>({{ $salestransaction->discount }}%) </td>
+                <td width="10%">{{ $salestransaction->transaction_date }}</td>
+                <td width="25%">{{ $salestransaction->product->product_name}}<br>({{ $salestransaction->product->product_id}})</td>
+                <td width="25%">{{ $salestransaction->salesperson->last_name . ', ' . $salestransaction->salesperson->first_name}}<br>({{$salestransaction->salesperson->employee_id}})</td>
+                <td width="10%" class="rj">{{ number_format($salestransaction->quantity,0,'.',',') }}</td>
+                <td width="10%" class="rj">{{ $salestransaction->product->price}}<br>({{ $salestransaction->discount }}%) </td>
 
                 <?php
 
@@ -65,14 +72,15 @@ such as a page specific styesheets.
                     $tot = $tot * ((100 - $salestransaction->discount) / 100);
                     $tot = number_format($tot,2,'.',',');
                 ?>
-                <td class="rj">{{ $tot }}</td>
-                <td>&nbsp;&nbsp;
-                    <a href="{{ URL::to('/salestransactionedit') }}/{{ $salestransaction->id}}/Edit"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a>
-                    <br>
-                    <a href="{{ URL::to('/salestransactionedit') }}/{{ $salestransaction->id}}/Delete"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                <td width="10%" class="rj">{{ $tot }}</td>
+                <td width="10%" class="actions">&nbsp;&nbsp;
+                    <a href="{{ URL::to('/salestransactionedit') }}/{{ $salestransaction->id}}/Edit"><i class="fa fa-pencil-square-o" data-toggle="tooltip" title="Edit"></i></a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="{{ URL::to('/salestransactionedit') }}/{{ $salestransaction->id}}/Delete"><i class="fa fa-trash-o" data-toggle="tooltip" title="Delete"></i></a>
                 </td>
             </tr>
         @endforeach
+    </tbody>
     </table>
 </div>
 

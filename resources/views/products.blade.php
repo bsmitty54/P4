@@ -50,30 +50,34 @@ such as a page specific styesheets.
     <br>
     <table class="masterlist">
         <tr>
-            <th><a href="{{ action("ProductController@sortProducts",['column' => 'product_id']) }}">Product ID</a></th>
-            <th><a href="{{ action("ProductController@sortProducts",['column' => 'product_name']) }}">Product Name</a></th>
-            <th><a href="{{ action("ProductController@sortProducts",['column' => 'price']) }}">Price</a></th>
-            <th><a href="{{ action("ProductController@sortProducts",['column' => 'max_discount']) }}">Discount</a></th>
-            <th>Active</th>
-            <th>Actions</th>
+            <th width="25%"><a href="{{ action("ProductController@sortProducts",['column' => 'product_id']) }}">Product ID</a></th>
+            <th width="35%"><a href="{{ action("ProductController@sortProducts",['column' => 'product_name']) }}">Product Name</a></th>
+            <th width="12%"><a href="{{ action("ProductController@sortProducts",['column' => 'price']) }}">Price</a></th>
+            <th width="9%"><a href="{{ action("ProductController@sortProducts",['column' => 'max_discount']) }}">Discount</a></th>
+            <th width="9%">Active</th>
+            <th width="10%">Actions</th>
         </tr>
+    </table>
+</div>
+<div class="tablelist">
+    <table class="masterlist">
         @foreach ($products as $product)
             <tr>
-                <td>{{ $product->product_id }}</td>
-                <td>{{ $product->product_name }}</td>
-                <td>{{ $product->price }}</td>
-                <td>{{ $product->max_discount }}</td>
-                <td>
+                <td width="25%">{{ $product->product_id }}</td>
+                <td width="35%">{{ $product->product_name }}</td>
+                <td width="12%">{{ $product->price }}</td>
+                <td width="9%" width="10%">{{ $product->max_discount }}</td>
+                <td width="9%">
                     @if ($product->active == 1)
                         Yes
                     @else
                         No
                     @endif
                 </td>
-                <td>&nbsp;&nbsp;
-                    <a href="{{ URL::to('/productedit') }}/{{ $product->id}}/Edit"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a>
+                <td width="10%" class="actions">&nbsp;&nbsp;
+                    <a href="{{ URL::to('/productedit') }}/{{ $product->id}}/Edit"><i class="fa fa-pencil-square-o" data-toggle="tooltip" title="Edit"></i></a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="{{ URL::to('/productedit') }}/{{ $product->id}}/Delete"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                    <a href="{{ URL::to('/productedit') }}/{{ $product->id}}/Delete"><i class="fa fa-trash-o" data-toggle="tooltip" title="Delete"></i></a>
                 </td>
             </tr>
         @endforeach

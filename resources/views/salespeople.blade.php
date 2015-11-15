@@ -39,34 +39,38 @@ such as a page specific styesheets.
     <table class="masterlist">
         <tr>
 
-            <th><a href="{{ action("SalespersonController@sortSalespeople",['column' => 'employee_id']) }}">Employee ID</a></th>
-            <th><a href="{{ action("SalespersonController@sortSalespeople",['column' => 'last_name']) }}">Name</a></th>
-            <th><a href="{{ action("SalespersonController@sortSalespeople",['column' => 'city']) }}">Address</a></th>
-            <th>Email</th>
-            <th>Active</th>
-            <th>Actions</th>
+            <th width="15%"><a href="{{ action("SalespersonController@sortSalespeople",['column' => 'employee_id']) }}">Emp ID#</a></th>
+            <th width="25%"><a href="{{ action("SalespersonController@sortSalespeople",['column' => 'last_name']) }}">Name</a></th>
+            <th width="25%"><a href="{{ action("SalespersonController@sortSalespeople",['column' => 'city']) }}">Address</a></th>
+            <th width="15%">Email</th>
+            <th width="10%">Active</th>
+            <th width="10%">Actions</th>
         </tr>
+    </table>
+</div>
+<div class="tablelist">
+    <table class="masterlist">
         @foreach ($salespeople as $salesperson)
             <tr>
-                <td>{{ $salesperson->employee_id }}</td>
-                <td>{{ $salesperson->last_name }},{{ $salesperson->first_name }}</td>
-                <td>
+                <td width="15%">{{ $salesperson->employee_id }}</td>
+                <td width="25%">{{ $salesperson->last_name }},{{ $salesperson->first_name }}</td>
+                <td width="25%">
                     {{ $salesperson->street1 }}<br>
                     {{ $salesperson->city }},{{ $salesperson->state }}&nbsp;{{ $salesperson->zip_code }}
                 </td>
 
-                <td>{{ $salesperson->email }}</td>
-                <td>
+                <td width="15%">{{ $salesperson->email }}</td>
+                <td width="10%">
                     @if (is_null($salesperson->termination_date) || ($salesperson->termination_date == '') ||($salesperson->termination_date == '0000-00-00'))
                         Yes
                     @else
                         No
                     @endif
                 </td>
-                <td>&nbsp;&nbsp;
-                    <a href="{{ URL::to('/salespersonedit') }}/{{ $salesperson->id}}/Edit"><i class="fa fa-pencil-square-o"></i>&nbsp;Edit</a>
+                <td width="10%" class="actions">&nbsp;&nbsp;
+                    <a href="{{ URL::to('/salespersonedit') }}/{{ $salesperson->id}}/Edit"><i class="fa fa-pencil-square-o" data-toggle="tooltip" title="Edit"></i></a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="{{ URL::to('/salespersonedit') }}/{{ $salesperson->id}}/Delete"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+                    <a href="{{ URL::to('/salespersonedit') }}/{{ $salesperson->id}}/Delete"><i class="fa fa-trash-o" data-toggle="tooltip" title="Delete"></i></a>
                 </td>
             </tr>
         @endforeach

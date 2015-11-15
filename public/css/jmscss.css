@@ -58,6 +58,8 @@
   border-radius:00px;
   margin-top: 0px;
   min-width:160px;
+  padding-left: 5px;
+  padding-right: 1px;
 }
 
 #rightside {
@@ -243,7 +245,7 @@ legend {color:#560753; font-family: annie-use-your-telescope; font-style: italic
 
 .pwform label {
     text-align: right;
-
+    vertical-align: top;
     margin: 5px 5px 5px 25px;
     width: 200px;
 	color:#560753;
@@ -296,6 +298,24 @@ legend {color:#560753; font-family: annie-use-your-telescope; font-style: italic
 
 }
 
+.pwform textarea {
+    background-color: #DEE5F7;
+	color: black;
+	font-style: italic;
+	border: 2px inset;
+	line-height: 20px;
+	display: inline;
+}
+
+.field {
+    vertical-align: top;
+}
+
+.pwform input[type="textarea"] {
+    height: 100px;
+    width: 100px;
+}
+
 input[type="checkbox"], input[type="radio"] {
    width: 18px;
    height: 18px;
@@ -346,16 +366,27 @@ div.tablelist td {
     border: solid black 1px;
     color:#1210ED;
     padding: 0px 5px 0px 5px;
+    word-wrap:break-word;
 }
 
 div.tablelist td.rj {
     text-align: right;
 }
 
+div.tablelist td.actions {
+    text-align: center;
+}
+
+div.tablelist {
+    float:left;
+    width:100%;
+    max-height:300px;
+    overflow-y:scroll;
+}
+
 .masterlist {
     width: 100%;
-    overflow-y: scroll;
-
+    table-layout:fixed;
 }
 
 .masterlist tr {
@@ -369,6 +400,16 @@ div.tablelist td.rj {
 .masterlist tr:nth-child(even) {
     background: #D5D9F9;
 }
+
+.masterlist thead {
+    overflow-y:scroll;
+}
+
+.masterlist tbody {
+    overflow-y:scroll;
+    height:300px;
+}
+
 
 .button {
     float: left;
