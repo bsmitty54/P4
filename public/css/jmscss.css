@@ -363,8 +363,9 @@ div.tablelist th {
 }
 
 div.tablelist td {
-    border: solid black 1px;
-    color:#1210ED;
+    border: ridge gray 1px;
+    border-radius: 1px;
+    color: #2d2d86;
     padding: 0px 5px 0px 5px;
     word-wrap:break-word;
 }
@@ -496,6 +497,8 @@ a.tooltip:hover::after {
 span.msg {
     color: red;
     font-style: italic;
+    text-align: left;
+    width: 420px;
 }
 
 .fa-money {

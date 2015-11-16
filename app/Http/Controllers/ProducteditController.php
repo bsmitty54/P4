@@ -39,7 +39,6 @@ class ProducteditController extends Controller {
             // use DB facade to delete the row matching $pid
             \App\Product::destroy($pid);
             $request->session()->flash('message', 'Product ID ' . $request->input('productID') . ' Deleted');
-
         } else {
             // create a model and set the values, then session_save_path
             if($mode == 'Edit') {

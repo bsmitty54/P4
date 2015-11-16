@@ -71,13 +71,21 @@ such as a page specific styesheets.
 
         <br><br><label for="submit">&nbsp;</label>
         <a class="formbutton" title="Back" alt="Back" href="{{URL::to('/salespeople')}}">Cancel</a>
-        <button type="submit" id="submit" class="btn btn-primary">
-            @if ($mode == 'Delete')
-                DELETE (permanent!)
+        <?php
+            $stx = \App\Sales_transaction::where('salesperson_id','=',$sid)->get();
+            $count = $stx->count();
+        ?>
+
+        @if ($mode == 'Delete')
+            @if ($count < '1')
+                <button type="submit" id="submit" class="btn btn-primary">DELETE (permanent!)</button>
             @else
-                Save
+                <span class="msg">Cannot delete a salesperson that has been used in a sales transaction!</span>
             @endif
-        </button>
+        @else
+            <button type="submit" id="submit" class="btn btn-primary">Save</button>
+        @endif
+        
     </div>
 
   </fieldset>
