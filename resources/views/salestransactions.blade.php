@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    <i class="fa fa-money"></i>&nbsp;&nbsp;&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-money"></i>
+    Joe's Sales Tracker
 @stop
 
 

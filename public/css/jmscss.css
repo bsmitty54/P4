@@ -124,7 +124,7 @@ a {
 	color: #560753;
 }
 
-legend, .pwform  p.legend {
+legend, .pwform p.legend {
   color:#560753;
   font-family: annie-use-your-telescope;
   font-style: italic;
@@ -243,11 +243,21 @@ legend {color:#560753; font-family: annie-use-your-telescope; font-style: italic
 
 }
 
-.pwform label {
+.filterform {
+
+    width: 800px;
+    background: white;
+    margin: 5px;
+    margin-left: 25px;
+    padding: 5px;
+
+}
+
+.pwform label, .filterform label {
     text-align: right;
     vertical-align: top;
     margin: 5px 5px 5px 25px;
-    width: 200px;
+    width: 220px;
 	color:#560753;
 
 }
@@ -259,7 +269,7 @@ legend {color:#560753; font-family: annie-use-your-telescope; font-style: italic
     color:#560753;
 }
 
-.pwform span {
+.pwform span, .filterform span {
     text-align: right;
     margin: 5px 5px 5px 30px;
     width: 100px;
@@ -297,6 +307,18 @@ legend {color:#560753; font-family: annie-use-your-telescope; font-style: italic
 	display: inline;
 
 }
+
+.filterform input, .filterform select, .filterform input[type="file"] {
+	background-color: #DEE5F7;
+	color: black;
+	font-style: italic;
+	border: 2px inset;
+	line-height: 20px;
+	height: 24px;
+	display: inline;
+
+}
+
 
 .pwform textarea {
     background-color: #DEE5F7;
@@ -498,7 +520,7 @@ span.msg {
     color: red;
     font-style: italic;
     text-align: left;
-    width: 420px;
+    width: 350px;
 }
 
 .fa-money {

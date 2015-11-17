@@ -13,7 +13,7 @@ class ProductController extends Controller {
     }
 
     /**
-    * Responds to requests to GET /books
+    * Responds to requests to GET /products
     */
     public function getIndex(Request $request) {
         // retreive the products from the table
@@ -26,20 +26,6 @@ class ProductController extends Controller {
 
 
     }
-
-    //if ($sortOrder == 'Price' ) {
-    //    $products = \App\Product::orderBy('price')->get();
-    //} elseif ($sortOrder == 'Product ID') {
-    //    $products = \App\Product::orderBy('product_id')->get();
-    //} elseif ($sortOrder == 'Discount') {
-    //    $products = \App\Product::orderBy('max_discount')->get();
-    //} else {
-    //    $products = \App\Product::orderBy('product_name')->get();
-    //}
-
-
-    // set the session variable
-
 
     public function sortProducts(Request $request,$column) {
         //get the collection from the seesion variable
@@ -70,6 +56,38 @@ class ProductController extends Controller {
 
     public function postIndex(Request $request) {
 
-        return view('products');
+        // first retrieve the product catalog
+        $products = \App\Product::orderBy('product_name')->get();
+        // now filter the collection as needed based on user input
+
+        //first filter on name / id if user entered a string
+        $pmatch = strtolower($request->input('product'));
+
+        if (isset($pmatch) && $pmatch != '') {
+            $filtered = $products->filter(function ($item) use ($pmatch) {
+                return (is_int(strpos(strtolower($item->product_name),$pmatch)) || is_int(strpos(strtolower($item->product_id),$pmatch)));
+            });
+            $products = $filtered;
+        }
+
+        //now filter on active if not set to "Both"
+        $active = $request->input('active');
+        if ($active == 1) {
+            // show only active
+            $filtered = $products->filter(function ($item) {
+                return $item->active == 1;
+            });
+            $products = $filtered;
+        } elseif ($active == 0) {
+            // show only active
+            $filtered = $products->filter(function ($item) {
+                return $item->active == 0;
+            });
+            $products = $filtered;
+        }
+
+        // now return the view with the filtered list
+        $pcol = $request->session()->get('pcol');
+        return view('products', ['sortOrder' => $pcol], ['products' => $products]);
     }
 }

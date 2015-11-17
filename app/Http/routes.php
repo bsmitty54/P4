@@ -18,16 +18,19 @@ Route::get('/', function () {
 Route::get('/products', ['uses' =>'ProductController@getIndex']);
 Route::post('/products', 'ProductController@postIndex');
 Route::get('/products/sort/{column}', 'ProductController@sortProducts');
+Route::post('/products/sort/{column}', 'ProductController@sortProducts');
 Route::get('/productedit/{pid}/{mode}', 'ProducteditController@getIndex');
 Route::post('/productedit/{pid}/{mode}', 'ProducteditController@postIndex');
 Route::get('/salespeople', ['uses' => 'SalespersonController@getIndex']);
 Route::post('/salespeople', 'SalespersonController@postIndex');
 Route::get('/salespeople/sort/{column}', 'SalespersonController@sortSalespeople');
+Route::post('/salespeople/sort/{column}', 'SalespersonController@sortSalespeople');
 Route::get('/salespersonedit/{sid}/{mode}', 'SalespersoneditController@getIndex');
 Route::post('/salespersonedit/{sid}/{mode}', 'SalespersoneditController@postIndex');
 Route::get('/salestransactions', 'SalesTransactionController@getIndex');
 Route::post('/salestransactions', 'SalesTransactionController@postIndex');
 Route::get('/salestransactions/sort/{column}', 'SalesTransactionController@sortSalestransactions');
+Route::post('/salestransactions/sort/{column}', 'SalesTransactionController@sortSalestransactions');
 Route::get('/salestransactionedit/{txid}/{mode}', 'SalestransactioneditController@getIndex');
 Route::post('/salestransactionedit/{txid}/{mode}', 'SalestransactioneditController@postIndex');
 Route::get('/debug', function() {

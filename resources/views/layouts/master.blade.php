@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>
-        {{-- Yield the title if it exists, otherwise default to 'Foobooks' --}}
-        @yield('title','Joes Toolbox')
+        {{-- Yield the title if it exists, otherwise default to 'Joes Sales Tracker' --}}
+        @yield('title','Joes Sales Tracker')
     </title>
 
     <meta charset='utf-8'>
@@ -30,8 +30,7 @@
       <div id="topHeader" class="">
 
       	<div class="transbox">
-
-      		@yield('title','Joes Sales Tracker App')
+      		<i class="fa fa-money"></i>&nbsp;&nbsp;&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-money"></i>
         </div>
 
       </div>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    <i class="fa fa-money"></i>&nbsp;&nbsp;&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-money"></i>
+    Joe's Sales Tracker
 @stop
 
 
@@ -35,11 +35,27 @@ such as a page specific styesheets.
     <br>
 </div>
 
+<?php
+  $product = Request::input('product', '');
+  $active = Request::input('active', '2');
+?>
+
 <div class="filters">
     <br>
     <hr class="homepage">
     <form method="post" class="filterform" action="#">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="field">
+            <label for='product'>Match Product ID or Name On:</label>
+            <input type="text" id="product" name="product" placeholder="Product ID/Name" size="30" maxlength="30" value="{{ $product }}" }}>
+        </div>
+        <br>
+        <label>Active:</label>
+        <input type="radio" name="active" id="Yes" value="1" {{ $active == '1' ? 'checked' : ''}} required> Yes
+        <input type="radio" name="active" id="No" value="0" {{ $active == '0' ? 'checked' : ''}} required> No
+        <input type="radio" name="active" id="Both" value="2" {{ $active == '2' ? 'checked' : ''}} required> Both
+        <br><br>
+        <label>&nbsp</label>
         <a class="formbutton" onclick="hidefilters()" title="Back" alt="Back" href="">Cancel</a>
         <button onclick="hidefilters()" type="submit" id="submit" class="btn btn-primary showfilter">Apply</button>
     </form>
