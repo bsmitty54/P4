@@ -15,18 +15,18 @@ class ProducteditController extends Controller {
     /**
     * Responds to requests to GET /books
     */
-    public function getIndex($pid,$mode) {
+    public function getIndex(Request $request,$pid,$mode) {
         // retreive the products from the table
 
         if ($mode == 'Add') {
             // instantiate new product model and pass to view
             $product = new \App\Product;
-            return view('productedit',['pid' => $pid,'product' => $product,'mode' => $mode]);
+            return view('productedit',['pid' => $pid,'product' => $product,'mode' => $mode, 'request' => $request]);
         } else {
             // retrieve the row from the database, pass id into view
             $products = \App\Product::where('id','=',$pid)->get();
             $product = $products->first();
-            return view('productedit',['pid' => $pid,'product' => $product,'mode' => $mode]);
+            return view('productedit',['pid' => $pid,'product' => $product,'mode' => $mode, 'request' => $request]);
         }
 
 
@@ -40,6 +40,14 @@ class ProducteditController extends Controller {
             \App\Product::destroy($pid);
             $request->session()->flash('message', 'Product ID ' . $request->input('productID') . ' Deleted');
         } else {
+            // validate that the product ID is at least 5 characters
+            $this->validate($request, [
+                'productID' => 'required|min:5',
+                'productName' => 'required|min:5',
+                'price' => 'required|numeric|min:3|max:100000',
+                'discount' => 'required|numeric|min:0|max:30',
+                'active' => 'required',
+            ]);
             // create a model and set the values, then session_save_path
             if($mode == 'Edit') {
                 // get the model from the db
@@ -71,5 +79,17 @@ class ProducteditController extends Controller {
         $request->session()->put('products',$products);
         // now direct to the sort route to retain the sort the user had before editing
         return redirect('products/sort/' . $pcol);
+    }
+
+    public function showError ($errors,$field) {
+        if (isset($errors)) {
+            if ($errors->has($field)) {
+                echo '<br>';
+                echo '<label></label>';
+                echo '<span class="msg">';
+                echo $errors->first($field);
+                echo '</span>';
+            }
+        }
     }
 }

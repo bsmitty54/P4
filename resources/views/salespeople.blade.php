@@ -31,9 +31,48 @@ such as a page specific styesheets.
 
     <br>
     <a class="button" href="{{ URL::to('/salespersonedit/New/Add') }}"><i class="fa fa-plus"></i>&nbsp;Add New Salesperson</a>
-    <a class="button" href=""><i class="fa fa-filter"></i>&nbsp;Filter Salespeople</a>
+    <a class="button" onclick="showfilters()" href="#"><i class="fa fa-filter"></i>&nbsp;Filter Salespeople</a>
     <br>
 </div>
+
+<?php
+  $salesperson = Request::input('salesperson', '');
+  $city = Request::input('city', '');
+  $state = Request::input('state', '');
+  $active = Request::input('active', '2');
+?>
+
+<div class="filters">
+    <br>
+    <hr class="homepage">
+    <form method="post" class="filterform" action="#">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="field">
+            <label for='salesperson'>Match Emp ID/ Name /Email On:</label>
+            <input type="text" id="salesperson" name="salesperson" placeholder="Employee ID/Name" size="30" maxlength="30" value="{{ $salesperson }}" }} autofocus>
+        </div>
+        <div class="field">
+            <label for='city'>Match City On:</label>
+            <input type="text" id="city" name="city" placeholder="City" size="20" maxlength="20" value="{{ $city }}" }}>
+        </div>
+        <div class="field">
+            <label for='state'>Match State On:</label>
+            <input type="text" id="state" name="state" placeholder="State" size="5" maxlength="2" value="{{ $state }}" }}>
+        </div>
+        <br>
+        <label>Active:</label>
+        <input type="radio" name="active" id="Yes" value="1" {{ $active == '1' ? 'checked' : ''}} required> Yes
+        <input type="radio" name="active" id="No" value="0" {{ $active == '0' ? 'checked' : ''}} required> No
+        <input type="radio" name="active" id="Both" value="2" {{ $active == '2' ? 'checked' : ''}} required> Both
+        <br><br>
+        <label>&nbsp</label>
+        <a class="formbutton" onclick="hidefilters()" title="Back" alt="Back" href="#">Cancel</a>
+        <button onclick="hidefilters()" type="submit" id="submit" class="btn btn-primary showfilter">Apply</button>
+    </form>
+    <hr class="homepage">
+</div>
+
+
 <div class="tablelist">
     <br>
     <table class="masterlist">

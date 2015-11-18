@@ -47,7 +47,7 @@ such as a page specific styesheets.
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="field">
             <label for='product'>Match Product ID or Name On:</label>
-            <input type="text" id="product" name="product" placeholder="Product ID/Name" size="30" maxlength="30" value="{{ $product }}" }}>
+            <input type="text" id="product" name="product" placeholder="Product ID/Name" size="30" maxlength="30" value="{{ $product }}" }} autofocus>
         </div>
         <br>
         <label>Active:</label>

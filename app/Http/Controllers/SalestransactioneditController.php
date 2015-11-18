@@ -45,6 +45,13 @@ class SalestransactioneditController extends Controller {
         } else {
 
             // create a model and set the values, then session_save_path
+            $this->validate($request, [
+                'transactionDate' => 'required|min:5',
+                'product' => 'required',
+                'salesperson' => 'required',
+                'discount' => 'required|numeric|min:0',
+                'quantity' => 'required|numeric|min:1',
+            ]);
             if($mode == 'Edit') {
                 // get the model from the db
                 $salestransactions = \App\Sales_transaction::where('id','=',$txid)->get();
@@ -76,5 +83,17 @@ class SalestransactioneditController extends Controller {
         $request->session()->put('salestransactions',$salestransactions);
         // now direct to the sort route to retain the sort the user had before editing
         return redirect('salestransactions/sort/' . $txcol);
+    }
+
+    public function showError ($errors,$field) {
+        if (isset($errors)) {
+            if ($errors->has($field)) {
+                echo '<br>';
+                echo '<label></label>';
+                echo '<span class="msg">';
+                echo $errors->first($field);
+                echo '</span>';
+            }
+        }
     }
 }

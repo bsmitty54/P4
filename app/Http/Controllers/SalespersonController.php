@@ -81,8 +81,60 @@ class SalespersonController extends Controller {
     /**
      * Responds to requests to POST /books/create
      */
-    public function postIndex(Request $request) {
+     public function postIndex(Request $request) {
 
-        return view('salespeople');
-    }
+         // first retrieve the salesperson list
+         $salespeople = \App\Salesperson::orderBy('last_name')->get();
+         // now filter the collection as needed based on user input
+
+         //first filter on name / id if user entered a string
+         $smatch = strtolower($request->input('salesperson'));
+
+         if (isset($smatch) && $smatch != '') {
+             $filtered = $salespeople->filter(function ($item) use ($smatch) {
+                 return (is_int(strpos(strtolower($item->last_name),$smatch)) || is_int(strpos(strtolower($item->employee_id),$smatch)) || is_int(strpos(strtolower($item->email),$smatch)));
+             });
+             $salespeople = $filtered;
+         }
+
+         // now filter on city
+         $smatch = strtolower($request->input('city'));
+
+         if (isset($smatch) && $smatch != '') {
+             $filtered = $salespeople->filter(function ($item) use ($smatch) {
+                 return (is_int(strpos(strtolower($item->city),$smatch)));
+             });
+             $salespeople = $filtered;
+         }
+
+         // now filter on state
+         $smatch = strtolower($request->input('state'));
+
+         if (isset($smatch) && $smatch != '') {
+             $filtered = $salespeople->filter(function ($item) use ($smatch) {
+                 return (is_int(strpos(strtolower($item->state),$smatch)));
+             });
+             $salespeople = $filtered;
+         }
+
+         //now filter on active if not set to "Both"
+         $active = $request->input('active');
+         if ($active == 1) {
+             // show only active
+             $filtered = $salespeople->filter(function ($item) {
+                 return (($item->termination_date == '0000-00-00') || is_null($item->termination_date) || ($item->termination_date > getdate()));
+             });
+             $salespeople = $filtered;
+         } elseif ($active == 0) {
+             // show only active
+             $filtered = $salespeople->filter(function ($item) {
+                 return (($item->termination_date != '0000-00-00') && ($item->termination_date <= getdate()));
+             });
+             $salespeople = $filtered;
+         }
+
+         // now return the view with the filtered list
+         $pcol = $request->session()->get('pcol');
+         return view('salespeople', ['sortOrder' => $pcol], ['salespeople' => $salespeople]);
+     }
 }

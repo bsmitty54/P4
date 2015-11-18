@@ -82,6 +82,38 @@ class SalespeopleController extends Controller {
      */
     public function postIndex(Request $request) {
 
-        return view('salespeople');
+        // first retrieve the salesperson list
+        $salespeople = \App\Salesperson::orderBy('last_name')->get();
+        // now filter the collection as needed based on user input
+
+        //first filter on name / id if user entered a string
+        $smatch = strtolower($request->input('salesperson'));
+
+        if (isset($smatch) && $smatch != '') {
+            $filtered = $salespeople->filter(function ($item) use ($smatch) {
+                return (is_int(strpos(strtolower($item->last_name),$smatch)) || is_int(strpos(strtolower($item->product_id),$smatch)));
+            });
+            $salespeople = $filtered;
+        }
+
+        //now filter on active if not set to "Both"
+        $active = $request->input('active');
+        if ($active == 1) {
+            // show only active
+            $filtered = $salespeople->filter(function ($item) {
+                return $item->termination_date == '' || is_null($item->termination_date) || ($item->termination_date > getdate());
+            });
+            $salespeople = $filtered;
+        } elseif ($active == 0) {
+            // show only active
+            $filtered = $salespeople->filter(function ($item) {
+                return !is_null($item->termination_date) && ($item->termination_date !> getdate());
+            });
+            $salespeople = $filtered;
+        }
+
+        // now return the view with the filtered list
+        $pcol = $request->session()->get('pcol');
+        return view('salespeople', ['sortOrder' => $pcol], ['salespeople' => $salespeople]);
     }
 }

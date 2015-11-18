@@ -41,6 +41,18 @@ class SalespersoneditController extends Controller {
             $request->session()->flash('message', 'Employee ID ' . $request->input('employee_id') . ' Deleted');
 
         } else {
+            $this->validate($request, [
+                'employeeID' => 'required|min:5',
+                'lastName' => 'required|min:2',
+                'firstName' => 'required|min:2',
+                'street1' => 'required|min:5',
+                'city' => 'required|min:2',
+                'state' => 'required|size:2',
+                'zipCode' => 'required',
+                'email' => 'email',
+                'hireDate' => 'required|date',
+                'terminationDate' => 'date',
+            ]);
             // create a model and set the values, then session_save_path
             if($mode == 'Edit') {
                 // get the model from the db
@@ -78,5 +90,17 @@ class SalespersoneditController extends Controller {
         $request->session()->put('salespeople',$salespeople);
         // now direct to the sort route to retain the sort the user had before editing
         return redirect('salespeople/sort/' . $scol);
+    }
+
+    public function showError ($errors,$field) {
+        if (isset($errors)) {
+            if ($errors->has($field)) {
+                echo '<br>';
+                echo '<label></label>';
+                echo '<span class="msg">';
+                echo $errors->first($field);
+                echo '</span>';
+            }
+        }
     }
 }
