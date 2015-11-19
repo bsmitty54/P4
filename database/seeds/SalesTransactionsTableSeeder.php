@@ -15,7 +15,7 @@ class SalesTransactionsTableSeeder extends Seeder
         $pcount = DB::table('products')->count();
         $scount = DB::table('salespeople')->count();
         $faker = \Faker\Factory::create();
-        for ($i=1; $i<=2000; $i++) {
+        for ($i=1; $i<=500; $i++) {
             $tdate = $faker->dateTimeThisCentury();
             $pid = $faker->numberBetween($min = 1, $max = $pcount);
             $sid = $faker->numberBetween($min = 1, $max = $scount);

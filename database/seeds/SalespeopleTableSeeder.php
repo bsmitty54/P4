@@ -12,7 +12,7 @@ class SalespeopleTableSeeder extends Seeder
     public function run()
     {
         $faker = \Faker\Factory::create();
-        for ($i=1; $i<=1000; $i++) {
+        for ($i=1; $i<=300; $i++) {
             // create the data
             $empID = $faker->creditCardNumber();
             $lastName = $faker->lastName();
