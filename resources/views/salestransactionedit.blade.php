@@ -12,6 +12,7 @@ such as a page specific styesheets.
 --}}
 @section('head')
 
+{{-- need to retain old input if validation failed --}}
 <?php
     if (count($errors) > 0 && $mode == 'Add') {
         $date = Input::old('transactionDate');

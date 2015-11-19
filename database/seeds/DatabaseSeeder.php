@@ -14,6 +14,12 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        DB::table('sales_transactions')->delete();
+        DB::table('salespeople')->delete();
+        DB::table('products')->delete();
+        DB::table('categories')->delete();
+
+        $this->call(CategoriesTableSeeder::class);
         $this->call(ProductsTableSeeder::class);
         $this->call(SalespeopleTableSeeder::class);
         $this->call(SalesTransactionsTableSeeder::class);

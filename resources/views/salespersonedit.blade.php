@@ -16,6 +16,7 @@ such as a page specific styesheets.
 
 @section('content')
 
+{{-- need to retain old input if validation failed --}}
 <?php
     if (count($errors) > 0 && $mode == 'Add') {
         $id = Input::old('employeeID');

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,9 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
 
+
+        Schema::create('categories', function (Blueprint $table) {
         # Increments method will make a Primary, Auto-Incrementing field.
         # Most tables start off this way
         $table->increments('id');
@@ -23,18 +24,7 @@ class CreateProductsTable extends Migration
         $table->timestamps();
 
         # The rest of the fields...
-        $table->string('product_id',15);
-        $table->string('product_name');
-        $table->integer('category_id')->unsigned();
-        $table->decimal('price');
-        $table->integer('max_discount');
-        $table->boolean('active');
-
-
-        });
-
-        Schema::table('products', function($table) {
-            $table->foreign('category_id')->references('id')->on('categories');
+        $table->string('category_name',20);
         });
     }
 
@@ -45,6 +35,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('products');
+        Schema::drop('categories');
     }
 }
