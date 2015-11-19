@@ -41,11 +41,25 @@ class ProductController extends Controller {
                 $ord = 'D';
             }
         }
-        if ($ord == 'A') {
-                $products = $products->sortBy($column);
-            } else {
-                $products = $products->sortByDesc($column);
+        if ($column == 'category_id') {
+            if ($ord == 'A') {
+                $products = $products->sortBy(function($products) {
+                    return $products->category->category_name . ',' . $products->product_name;
+                });
+
+                } else {
+                    $products = $products->sortByDesc(function($products) {
+                        return $products->category->category_name . ',' . $products->product_name;
+                    });
+
             }
+        } else {
+            if ($ord == 'A') {
+                $products = $products->sortBy($column);
+                } else {
+                    $products = $products->sortByDesc($column);
+            }
+        }
         $products->values()->all();
         // set the session variable to refelect the current sort
         $request->session()->put('pcol',$column);
@@ -57,6 +71,8 @@ class ProductController extends Controller {
     public function postIndex(Request $request) {
 
         // first retrieve the product catalog
+        $products = NULL;
+        $request->session()->put('products',$products);
         $products = \App\Product::orderBy('product_name')->get();
         // now filter the collection as needed based on user input
 
@@ -86,8 +102,21 @@ class ProductController extends Controller {
             $products = $filtered;
         }
 
+        // now filter by category
+        $cat = $request->input('cat');
+
+        if (isset($cat) && $cat > 0) {
+
+            $filtered = $products->filter(function ($item) use ($cat) {
+                return $item->category_id == $cat;
+            });
+            $products = $filtered;
+        }
+
         // now return the view with the filtered list
+        $request->session()->put('products',$products);
         $pcol = $request->session()->get('pcol');
-        return view('products', ['sortOrder' => $pcol], ['products' => $products]);
+        $fil = $pmatch . ' ' . $cat . ' ' . $active;
+        return view('products', ['sortOrder' => $pcol], ['products' => $products], ['fil' => $fil]);
     }
 }

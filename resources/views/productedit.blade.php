@@ -22,6 +22,7 @@ such as a page specific styesheets.
     if (count($errors) > 0 && $mode == 'Add') {
         $id = Input::old('productID');
         $name = Input::old('productName');
+        $category = Input::old('productCategory');
         $price = Input::old('price');
         $discount = Input::old('discount');
         $active = Input::old('active');
@@ -29,11 +30,19 @@ such as a page specific styesheets.
     } else {
         $id = $product->product_id;
         $name = $product->product_name;
+        $category = $product->category_id;
         $price = $product->price;
         $discount = $product->max_discount;
         $active = $product->active;
     }
 ?>
+
+<script>
+    $(document).ready(function(){
+        setSalesDropDowns('category',{{ $category }});
+    });
+</script>
+
 
 <form method="POST" action="{{URL::to('/productedit')}}/{{$pid}}/{{$mode}}">
 
@@ -62,6 +71,21 @@ such as a page specific styesheets.
             <input type="text" id="productName" name="productName" placeholder="Product Name" size="50" maxlength="100" value="{{ $name }}" {{ $mode == 'Delete' ? 'readonly':''}}>
             <?php $errorDisplay->showError($errors,'productName'); ?>
         </div>
+
+        <div class="field">
+            <label for='category'>Category:</label>
+            {{-- first load the category list --}}
+            <?php $categorylist = \App\Category::orderBy('category_name')->get(); ?>
+            {{-- loop through the category list and add to the dropdown --}}
+            <select id="category" name="category">
+                <option value="" disc="0">Select a Category</option>
+                @foreach ($categorylist as $category)
+                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                @endforeach
+            </select>
+            <?php $errorDisplay->showError($errors,'category'); ?>
+        </div>
+
         <div class="field">
             <label for='price'>Price:</label>
             <input type="number" id="price" name="price" placeholder="Price" size="9" maxlength="9" step="0.01" value="{{ $price }}" {{ $mode == 'Delete' ? 'readonly':''}}>

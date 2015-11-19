@@ -407,6 +407,11 @@ div.tablelist {
     overflow-y:scroll;
 }
 
+div.record-count {
+    clear: both;
+    padding-top: 5px;
+}
+
 .masterlist {
     width: 100%;
     table-layout:fixed;

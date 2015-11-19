@@ -44,6 +44,7 @@ class ProducteditController extends Controller {
             $this->validate($request, [
                 'productID' => 'required|min:5',
                 'productName' => 'required|min:5',
+                'category' => 'required',
                 'price' => 'required|numeric|min:3|max:100000',
                 'discount' => 'required|numeric|min:0|max:30',
                 'active' => 'required',
@@ -60,6 +61,7 @@ class ProducteditController extends Controller {
             // now set the model attributes
             $product->product_id = $request->input('productID');
             $product->product_name = $request->input('productName');
+            $product->category_id = $request->input('category');
             $product->price = $request->input('price');
             $product->max_discount = $request->input('discount');
             $product->active = $request->input('active');

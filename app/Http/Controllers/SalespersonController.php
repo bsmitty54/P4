@@ -134,6 +134,7 @@ class SalespersonController extends Controller {
          }
 
          // now return the view with the filtered list
+         $request->session()->put('salespeople',$salespeople);
          $pcol = $request->session()->get('pcol');
          return view('salespeople', ['sortOrder' => $pcol], ['salespeople' => $salespeople]);
      }

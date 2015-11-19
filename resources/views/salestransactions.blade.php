@@ -84,6 +84,7 @@ such as a page specific styesheets.
     </table>
 </div>
 
+<div class="record-count"><span>{{ count($salestransactions) }}&nbsp;Records Displayed</span></div>
 
 @stop
 

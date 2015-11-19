@@ -11,49 +11,32 @@ class SalesTransactionsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sales_transactions')->insert([
-            'id' => 1,
-            'transaction_date' => '2015-02-15',
-            'product_id' => 1,
-            'salesperson_id' => 1,
-            'quantity' => 1000,
-            'discount' => 5,
-            'comments' => 'Local TV store reordered',
-            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-        ]);
-        DB::table('sales_transactions')->insert([
-            'id' => 2,
-            'transaction_date' => '2015-03-15',
-            'product_id' => 1,
-            'salesperson_id' => 2,
-            'quantity' => 5000,
-            'discount' => 3,
-            'comments' => 'Monthly Walmart Order',
-            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-        ]);
-        DB::table('sales_transactions')->insert([
-            'id' => 3,
-            'transaction_date' => '2015-04-01',
-            'product_id' => 2,
-            'salesperson_id' => 2,
-            'quantity' => 6000,
-            'discount' => 4,
-            'comments' => 'Best Buy Monthly Order',
-            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-        ]);
-        DB::table('sales_transactions')->insert([
-            'id' => 4,
-            'transaction_date' => '2015-04-10',
-            'product_id' => 3,
-            'salesperson_id' => 3,
-            'quantity' => 1500,
-            'discount' => 7,
-            'comments' => 'Increased discount for Best Buy based on monthy quantities',
-            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-        ]);
+        // get count of products and Salespeople
+        $pcount = DB::table('products')->count();
+        $scount = DB::table('salespeople')->count();
+        $faker = \Faker\Factory::create();
+        for ($i=1; $i<=2000; $i++) {
+            $tdate = $faker->dateTimeThisCentury();
+            $pid = $faker->numberBetween($min = 1, $max = $pcount);
+            $sid = $faker->numberBetween($min = 1, $max = $scount);
+            $quantity = ($faker->numberBetween($min = 1, $max = 10)) * 500;
+            // what is the max discount for the selected product
+            $product = DB::table('products')->where('id','=',$pid)->first();
+            $maxDiscount = $product->max_discount;
+            $discount = $faker->numberBetween($min = 0, $max = $maxDiscount);
+            $comments = $faker->text($maxNbChars = 200);
+            DB::table('sales_transactions')->insert([
+                'id' => $i,
+                'transaction_date' => $tdate,
+                'product_id' => $pid,
+                'salesperson_id' => $sid,
+                'quantity' => $quantity,
+                'discount' => $discount,
+                'comments' => $comments,
+                'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]);
+        }
+
     }
 }
