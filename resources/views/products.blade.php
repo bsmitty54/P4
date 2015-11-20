@@ -41,7 +41,7 @@ such as a page specific styesheets.
   $active = Request::input('active', '2');
  ?>
 
- <!! {{{ isset($fil) ? $fil : 'Default' }}} !!>
+ 
 
 <script>
     $(document).ready(function(){

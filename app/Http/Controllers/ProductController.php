@@ -71,8 +71,7 @@ class ProductController extends Controller {
     public function postIndex(Request $request) {
 
         // first retrieve the product catalog
-        $products = NULL;
-        $request->session()->put('products',$products);
+
         $products = \App\Product::orderBy('product_name')->get();
         // now filter the collection as needed based on user input
 
@@ -116,7 +115,7 @@ class ProductController extends Controller {
         // now return the view with the filtered list
         $request->session()->put('products',$products);
         $pcol = $request->session()->get('pcol');
-        $fil = $pmatch . ' ' . $cat . ' ' . $active;
-        return view('products', ['sortOrder' => $pcol], ['products' => $products], ['fil' => $fil]);
+
+        return view('products', ['sortOrder' => $pcol], ['products' => $products]);
     }
 }

@@ -15,7 +15,7 @@ class SalesTransactionController extends Controller {
     * Responds to requests to GET /books
     */
     public function getIndex(Request $request) {
-        $salestransactions = \App\Sales_transaction::orderBy('transaction_date')->get();
+        $salestransactions = \App\Sales_transaction::orderBy('transaction_date','desc')->take(100)->get();
         $request->session()->put('salestransactions',$salestransactions);
         $request->session()->put('txcol','transaction_date');
         $request->session()->put('txord','A');
@@ -97,8 +97,64 @@ class SalesTransactionController extends Controller {
          return view('salestransactions', ['sortOrder' => $column], ['salestransactions' => $salestransactions]);
      }
 
-    public function postIndex(Request $request) {
+     public function postIndex(Request $request) {
 
-        return view('salestransactions',['sortOrder' => 'transaction_date'], ['salestransactions' => $salestransactions]);
-    }
+         // first retrieve the transaction based on date - if no dates, get most recent 100 transactions
+
+         $fromDate = $request->input('fromDate');
+         $thruDate = $request->input('thruDate');
+         if ((is_null($fromDate) || ($fromDate == '')) && (is_null($thruDate) || ($thruDate == ''))) {
+             // no dates, so get last 100 transactions
+            $salestransactions = \App\Sales_transaction::orderBy('transaction_date','desc')->take(100)->get();
+        } elseif ((is_null($fromDate) || ($fromDate == ''))) {
+            // get tx's before thru date
+            $salestransactions = \App\Sales_transaction::where('transaction_date','<=',$thruDate)->orderBy('transaction_date','desc')->get();
+        } elseif ((is_null($thruDate) || ($thruDate == ''))) {
+            // get tx's before thru date
+            $salestransactions = \App\Sales_transaction::where('transaction_date','>=',$fromDate)->orderBy('transaction_date','desc')->get();
+        } else {
+            // get tx's between both dates
+            $salestransactions = \App\Sales_transaction::whereBetween('transaction_date',[$fromDate,$thruDate])->orderBy('transaction_date','desc')->get();
+        }
+
+         // now filter the collection as needed based on user input
+
+         // first filter by category
+         $cat = $request->input('cat');
+
+         if (isset($cat) && $cat > 0) {
+
+             $filtered = $salestransactions->filter(function ($item) use ($cat) {
+                 return $item->product->category->id == $cat;
+             });
+             $salestransactions = $filtered;
+         }
+
+         // now filter by product
+         $product = $request->input('product');
+
+         if (isset($product) && $product > 0) {
+
+             $filtered = $salestransactions->filter(function ($item) use ($product) {
+                 return $item->product->id == $product;
+             });
+             $salestransactions = $filtered;
+         }
+
+         // now filter by salesperson
+         $salesperson = $request->input('salesperson');
+
+         if (isset($salesperson) && $salesperson > 0) {
+
+             $filtered = $salestransactions->filter(function ($item) use ($salesperson) {
+                 return $item->salesperson->id == $salesperson;
+             });
+             $salestransactions = $filtered;
+         }
+
+         // now return the view with the filtered list
+         $request->session()->put('salestransactions',$salestransactions);
+         $pcol = $request->session()->get('pcol');
+         return view('salestransactions', ['sortOrder' => $pcol], ['salestransactions' => $salestransactions]);
+     }
 }

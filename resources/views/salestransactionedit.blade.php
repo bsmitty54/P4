@@ -35,6 +35,7 @@ such as a page specific styesheets.
 
 <script>
     $(document).ready(function(){
+        
         setSalesDropDowns('product',{{ $product }});
         setSalesDropDowns('salesperson',{{ $salesperson }});
         updateDiscount();
