@@ -16,6 +16,7 @@ class SalesTransactionController extends Controller {
     */
     public function getIndex(Request $request) {
         $salestransactions = \App\Sales_transaction::orderBy('transaction_date','desc')->take(100)->get();
+        $request->session()->flash('show100', 'Showing last 100 transaction by default - use the filter option to see more transactions.');
         $request->session()->put('salestransactions',$salestransactions);
         $request->session()->put('txcol','transaction_date');
         $request->session()->put('txord','A');
@@ -106,6 +107,7 @@ class SalesTransactionController extends Controller {
          if ((is_null($fromDate) || ($fromDate == '')) && (is_null($thruDate) || ($thruDate == ''))) {
              // no dates, so get last 100 transactions
             $salestransactions = \App\Sales_transaction::orderBy('transaction_date','desc')->take(100)->get();
+            $request->session()->flash('show100', 'Showing last 100 transaction by default - use the filter option to see more transactions.');
         } elseif ((is_null($fromDate) || ($fromDate == ''))) {
             // get tx's before thru date
             $salestransactions = \App\Sales_transaction::where('transaction_date','<=',$thruDate)->orderBy('transaction_date','desc')->get();

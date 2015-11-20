@@ -124,6 +124,10 @@ a {
 	color: #560753;
 }
 
+th a {
+	color: blue;
+}
+
 legend, .pwform p.legend {
   color:#560753;
   font-family: annie-use-your-telescope;

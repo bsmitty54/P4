@@ -27,7 +27,13 @@ such as a page specific styesheets.
         echo '</span>';
         echo '<br>';
     }
-    
+    if (Session::has('show100')) {
+        echo '<span class="msg">';
+        echo Session::get('show100');
+        echo '</span>';
+        echo '<br>';
+    }
+
     ?>
 
     <br>
