@@ -85,7 +85,7 @@ class SalespersoneditController extends Controller {
         $sord = ($sord == 'A' ? 'D' : 'A');
         $request->session()->put('sord',$sord);
         // need to refresh the salespeople collection after changes
-        $salespeople = \App\Salesperson::orderBy('last_name')->get();
+        $salespeople = \App\Salesperson::orderBy('employee_id')->get();
         // now put the collection in the session variable
         $request->session()->put('salespeople',$salespeople);
         // now direct to the sort route to retain the sort the user had before editing

@@ -33,6 +33,12 @@ Route::get('/salestransactions/sort/{column}', 'SalesTransactionController@sortS
 Route::post('/salestransactions/sort/{column}', 'SalesTransactionController@sortSalestransactions');
 Route::get('/salestransactionedit/{txid}/{mode}', 'SalestransactioneditController@getIndex');
 Route::post('/salestransactionedit/{txid}/{mode}', 'SalestransactioneditController@postIndex');
+Route::get('/users', ['uses' =>'UserController@getIndex']);
+Route::post('/users', 'UserController@postIndex');
+Route::get('/users/sort/{column}', 'UserController@sortUsers');
+Route::post('/users/sort/{column}', 'UserController@sortUsers');
+Route::get('/useredit/{uid}/{mode}', 'UsereditController@getIndex');
+Route::post('/useredit/{uid}/{mode}', 'UsereditController@postIndex');
 Route::get('/debug', function() {
 
     echo '<pre>';

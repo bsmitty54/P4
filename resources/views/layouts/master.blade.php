@@ -46,6 +46,7 @@
               <li><a class="" href="{{ action("SalesTransactionController@getIndex") }}"><i class="fa fa-dollar"></i>&nbsp;Maintain Sales Transactions</a></li>
               <li><a class="" href="{{ action("ProductController@getIndex") }}"><i class="fa fa-tags"></i>&nbsp;Maintain Product Catalog</a></li>
               <li><a class="" href="{{ action("SalespersonController@getIndex") }}"><i class="fa fa-user"></i>&nbsp;Maintain Sales People</a></li>
+              <li><a class="" href="{{ action("UserController@getIndex") }}"><i class="fa fa-users"></i>&nbsp;Maintain Users</a></li>
 
             </ul>
         </div>

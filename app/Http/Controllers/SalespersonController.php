@@ -20,7 +20,7 @@ class SalespersonController extends Controller {
 
         $salespeople = \App\Salesperson::orderBy('employee_id')->get();
         $request->session()->put('salespeople',$salespeople);
-        $request->session()->put('scol','last_name');
+        $request->session()->put('scol','employee_id');
         $request->session()->put('sord','A');
         return view('salespeople', ['sortOrder' => 'employee_id'], ['salespeople' => $salespeople]);
 

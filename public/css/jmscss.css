@@ -454,6 +454,7 @@ div.record-count {
     float: left;
     margin-right: 10px;
     margin-bottom: 10px;
+    margin-top: 5px;
     background: #337ab7;
     color: white;
     height: 40px;

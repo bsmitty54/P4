@@ -78,7 +78,8 @@ class SalestransactioneditController extends Controller {
         $txord = ($txord == 'A' ? 'D' : 'A');
         $request->session()->put('txord',$txord);
         // need to refresh the products collection after changes
-        $salestransactions = \App\Sales_transaction::orderBy('transaction_date')->get();
+        $salestransactions = \App\Sales_transaction::orderBy('transaction_date','desc')->take(100)->get();
+        $request->session()->flash('show100', 'Showing last 100 transaction by default - use the filter option to see more transactions.');
         // now put the collection in the session variable
         $request->session()->put('salestransactions',$salestransactions);
         // now direct to the sort route to retain the sort the user had before editing

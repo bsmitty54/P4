@@ -18,7 +18,7 @@ such as a page specific styesheets.
 @section('content')
 
 <div class="tablecap">
-    <h1>Product Maintenance</h1>
+    <h2>Product Maintenance</h2>
 
     <?php
     if (Session::has('message')) {
@@ -29,10 +29,9 @@ such as a page specific styesheets.
     }
     ?>
 
-    <br>
     <a class="button" href="{{ URL::to('/productedit/New/Add') }}"><i class="fa fa-plus"></i>&nbsp;Add New Product</a>
     <a class="button showfilter" onclick="showfilters()" href="#"><i class="fa fa-filter"></i>&nbsp;Filter Products List</a>
-    <br>
+
 </div>
 
 <?php
@@ -41,7 +40,7 @@ such as a page specific styesheets.
   $active = Request::input('active', '2');
  ?>
 
- 
+
 
 <script>
     $(document).ready(function(){
@@ -84,7 +83,7 @@ such as a page specific styesheets.
 </div>
 
 <div class="tablelist">
-    <br>
+
     <table class="masterlist">
         <tr>
 
