@@ -24,6 +24,7 @@ such as a page specific styesheets.
         $firstName = Input::old('firstName');
         $email = Input::old('email');
         $password = Input::old('password');
+        $confirm = Input::old('confirm');
         $role = Input::old('role');
 
     } else {
@@ -31,13 +32,14 @@ such as a page specific styesheets.
         $firstName = $user->first_name;
         $email = $user->email;
         $password = '';
+        $confirm = '';
         $role = $user->role;
     }
 ?>
 
 <script>
     $(document).ready(function(){
-        $("#role").val({{ $role }});
+        $("#role").val('{{ $role }}');
     });
 </script>
 
@@ -76,10 +78,25 @@ such as a page specific styesheets.
             <?php $errorDisplay->showError($errors,'email'); ?>
         </div>
 
+        <div>
+            <label></label>
+            <span class="msg-long">
+                If you enter a new password, you must confirm it.  If you leave the password and confirmation blank,
+                the previous password will be retained. If this is a new user and you leave the password blank,
+                the user will not be able to login.
+            </span><br><br>
+        </div>
+
         <div class="field">
             <label for='password'>Password:</label>
-            <input type="text" id="password" name="password" placeholder="Passwprd" size="20" maxlength="16" value="{{ $password }}" {{ $mode == 'Delete' ? 'readonly':''}}>
+            <input type="password" id="password" name="password" placeholder="Password" size="20" maxlength="16" value="{{ $password }}" {{ $mode == 'Delete' ? 'readonly':''}}>
             <?php $errorDisplay->showError($errors,'password'); ?>
+        </div>
+
+        <div class="field">
+            <label for='password_confirmation'>Confirm Password:</label>
+            <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Passwprd" size="20" maxlength="16" value="{{ $confirm }}" {{ $mode == 'Delete' ? 'readonly':''}}>
+            <?php $errorDisplay->showError($errors,'confirm'); ?>
         </div>
 
         <div class="field">

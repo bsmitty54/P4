@@ -11,6 +11,24 @@
 |
 */
 
+\Validator::extendImplicit('confirm', function($attribute, $value, $parameters)
+{
+    $other = \Input::get($parameters[0]);
+    if ((is_null($value) || $value == '') && ($other != ''))  {
+        //password entered but no confirmation
+        return false;
+    } elseif ((is_null($other) || $other == '') && (is_null($value) || $value == '')) {
+        // no date in either password or confirmation field
+        return true;
+    } elseif ($other !== $value) {
+        // they are not equal
+        return false;
+    } else {
+        return true;
+    }
+
+});
+
 Route::get('/', function () {
     return view('home');
 });

@@ -535,11 +535,25 @@ a.tooltip:hover::after {
 
 span.msg {
     color: red;
+    background: #e5eeff;
+    border-radius: 5px;
     font-style: italic;
     text-align: left;
     width: 350px;
+    margin-left: 0px;
+    padding: 5px 5px 5px 5px;
 }
 
+span.msg-long {
+    color: blue;
+    background: #e5eeff;
+    border-radius: 5px;
+    font-style: italic;
+    text-align: left;
+    width: 500px;
+    margin-left: 0px;
+    padding: 5px 5px 5px 5px;
+}
 .fa-money {
     color: green;
 }

@@ -40,14 +40,16 @@ class UsereditController extends Controller {
             \App\User::destroy($uid);
             $request->session()->flash('message', 'User ' . $request->input('lastName') . ', ' . $request->input('firstName') . ' Deleted');
         } else {
-            // validate that the user ID is at least 5 characters
+
             $this->validate($request, [
                 'lastName' => 'required|min:2',
                 'firstName' => 'required|min:2',
                 'email' => 'required|email',
-                'password' => 'required|min:8|max:16',
+                'password' => 'confirmed|min:8|max:16',
                 'role' => 'required',
             ]);
+
+
             // create a model and set the values, then session_save_path
             if($mode == 'Edit') {
                 // get the model from the db
@@ -61,7 +63,13 @@ class UsereditController extends Controller {
             $user->last_name = $request->input('lastName');
             $user->first_name = $request->input('firstName');
             $user->email = $request->input('email');
-            $user->password = \Hash::make($request->input('password'));
+            $pwd = $request->input('password');
+            if (isset($pwd) && ($pwd != '')) {
+                $user->password = \Hash::make($request->input('password'));
+            } else {
+                $user->password = '';
+            }
+
             $user->role = $request->input('role');
             if($mode == 'Edit') {
                 $user->id = $uid;
