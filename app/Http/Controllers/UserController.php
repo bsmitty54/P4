@@ -76,6 +76,36 @@ class UserController extends Controller {
 
     public function postIndex(Request $request) {
 
+        // first retrieve the user list
+
+        $users = \App\User::orderBy('last_name')->orderBy('first_name')->get();
+        // now filter the collection as needed based on user input
+
+        //first filter on name / email if user entered a string
+        $umatch = strtolower($request->input('user'));
+
+        if (isset($umatch) && $umatch != '') {
+            $filtered = $users->filter(function ($item) use ($umatch) {
+                return (is_int(strpos(strtolower($item->last_name),$umatch)) || is_int(strpos(strtolower($item->email),$umatch)));
+            });
+            $users = $filtered;
+        }
+
+        // now filter by category
+        $role = $request->input('role');
+
+        if (isset($role) && $role != '') {
+
+            $filtered = $users->filter(function ($item) use ($role) {
+                return $item->role == $role;
+            });
+            $users = $filtered;
+        }
+
+        // now return the view with the filtered list
+        $request->session()->put('users',$users);
+        $ucol = $request->session()->get('ucol');
+
         return view('users', ['sortOrder' => $ucol], ['users' => $users]);
     }
 }

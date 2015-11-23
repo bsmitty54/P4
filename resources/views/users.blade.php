@@ -30,8 +30,45 @@ such as a page specific styesheets.
     ?>
 
     <a class="button" href="{{ URL::to('/useredit/New/Add') }}"><i class="fa fa-plus"></i>&nbsp;Add New User</a>
+    <a class="button showfilter" onclick="showfilters()" href="#"><i class="fa fa-filter"></i>&nbsp;Filter Products List</a>
 
 </div>
+
+<?php
+  $user = Request::input('user', '');
+  $role = Request::input('role', '');
+ ?>
+
+ <script>
+     $(document).ready(function(){
+         setSalesDropDowns('role','{{ $role }}');
+     });
+ </script>
+
+ <div class="filters">
+     <br>
+     <hr class="homepage">
+     <form method="post" class="filterform" action="{{ url('/users')}}">
+         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+         <div class="field">
+             <label for='product'>Match User Name or Email On:</label>
+             <input type="text" id="user" name="user" placeholder="User Name / Email" size="30" maxlength="30" value="{{ $user }}" }} autofocus>
+         </div>
+         <div class="field">
+             <label for='role'>Role:</label>
+             <select id="role" name="role">
+                 <option value="" disc="0">Select a Role</option>
+                 <option value="End User">End User</option>
+                 <option value="Administrator">Administrator</option>
+             </select>
+         </div>
+         <br><br>
+         <label>&nbsp</label>
+         <a class="formbutton" onclick="hidefilters()" title="Back" alt="Back" href="#">Cancel</a>
+         <button onclick="hidefilters()" type="submit" id="submit" class="btn btn-primary showfilter">Apply</button>
+     </form>
+     <hr class="homepage">
+ </div>
 
 <div class="tablelist">
 
