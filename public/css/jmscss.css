@@ -95,13 +95,44 @@ p.description {
 }
 
 div.transbox {
-    margin: 0px 30% 0px 30%;
+    margin: 0px 5% 0px 5%;
     background-color: #ffffff;
     border-left: solid 1px;
     border-right: solid 1px;
     opacity: 0.6;
 }
 
+div.transbox tr {
+    width:100%;
+}
+
+div.transbox table {
+    width:100%;
+}
+
+
+div.transbox td.hdr-left {
+    text-align: left;
+    width: 30%;
+    padding-left: 30px;
+    font-size:16px;
+    color: blue;
+    font-style: normal;
+}
+
+div.transbox td.hdr-right {
+    text-align: right;
+    padding-right: 30px;
+    width: 30%;
+    font-size:16px;
+    color: blue;
+    font-style: normal;
+}
+
+div.transbox td.hdr-center {
+    text-align: center;
+    width: 40%;
+}
 
 
 .showit {display:inline}
@@ -541,6 +572,7 @@ span.msg {
     text-align: left;
     width: 350px;
     margin-left: 0px;
+    margin-bottom: 5px;
     padding: 5px 5px 5px 5px;
 }
 

@@ -57,6 +57,16 @@ Route::get('/users/sort/{column}', 'UserController@sortUsers');
 Route::post('/users/sort/{column}', 'UserController@sortUsers');
 Route::get('/useredit/{uid}/{mode}', 'UsereditController@getIndex');
 Route::post('/useredit/{uid}/{mode}', 'UsereditController@postIndex');
+
+# Show login form
+Route::get('/login', 'Auth\AuthController@getLogin');
+
+# Process login form
+Route::post('/login', 'Auth\AuthController@postLogin');
+
+# Process logout
+Route::get('/logout', 'Auth\AuthController@getLogout');
+
 Route::get('/debug', function() {
 
     echo '<pre>';

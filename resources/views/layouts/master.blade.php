@@ -30,7 +30,13 @@
       <div id="topHeader" class="">
 
       	<div class="transbox">
-      		<i class="fa fa-money"></i>&nbsp;&nbsp;&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-money"></i>
+            <table>
+            <tr>
+                <td class="hdr-left">{{ Auth::check() ? 'Welcome, ' . Auth::user()->first_name : '' }}</td>
+      		    <td class="hdr-center"><i class="fa fa-money"></i>&nbsp;&nbsp;&nbsp;&nbsp;Joe's Sales Tracker&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-money"></i></td>
+                <td class="hdr-right">{{ Carbon\Carbon::now()->toDateString() }}</td>
+            </tr>
+            </table>
         </div>
 
       </div>
@@ -41,12 +47,21 @@
           <h2>Menu</h2>
             <ul class="nav nav-stacked">
 
-              <li><a class="" href="http://p1.jsmitty54php.com"><i class="fa fa-picture-o"></i>&nbsp;Back to Portfolio Page</a></li>
-              <li><a class="" href="{{URL::to('/')}}"><i class="fa fa-home"></i>&nbsp;Home</a></li>
-              <li><a class="" href="{{ action("SalesTransactionController@getIndex") }}"><i class="fa fa-dollar"></i>&nbsp;Maintain Sales Transactions</a></li>
-              <li><a class="" href="{{ action("ProductController@getIndex") }}"><i class="fa fa-tags"></i>&nbsp;Maintain Product Catalog</a></li>
-              <li><a class="" href="{{ action("SalespersonController@getIndex") }}"><i class="fa fa-user"></i>&nbsp;Maintain Sales People</a></li>
-              <li><a class="" href="{{ action("UserController@getIndex") }}"><i class="fa fa-users"></i>&nbsp;Maintain Users</a></li>
+            <li><a class="" href="http://p1.jsmitty54php.com"><i class="fa fa-picture-o"></i>&nbsp;Back to Portfolio Page</a></li>
+
+            @if(!Auth::check())
+                <li><a class="" href="{{URL::to('/login')}}"><i class="fa fa-key"></i>&nbsp;Login</a></li>
+            @else
+                <li><a class="" href="{{URL::to('/')}}"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                <li><a class="" href="{{ action("SalesTransactionController@getIndex") }}"><i class="fa fa-dollar"></i>&nbsp;Maintain Sales Transactions</a></li>
+                @if(Auth::user()->role == 'Administrator')
+                    <li><a class="" href="{{ action("ProductController@getIndex") }}"><i class="fa fa-tags"></i>&nbsp;Maintain Product Catalog</a></li>
+                    <li><a class="" href="{{ action("SalespersonController@getIndex") }}"><i class="fa fa-users"></i>&nbsp;Maintain Sales People</a></li>
+                    <li><a class="" href="{{ action("UserController@getIndex") }}"><i class="fa fa-user"></i>&nbsp;Maintain Users</a></li>
+                @endif
+                <li><a class="" href="{{URL::to('/logout')}}"><i class="fa fa-lock"></i>&nbsp;Logout</a></li>
+
+            @endif
 
             </ul>
         </div>

@@ -57,7 +57,7 @@ such as a page specific styesheets.
          <div class="field">
              <label for='role'>Role:</label>
              <select id="role" name="role">
-                 <option value="" disc="0">Select a Role</option>
+                 <option value="">Select a Role</option>
                  <option value="End User">End User</option>
                  <option value="Administrator">Administrator</option>
              </select>

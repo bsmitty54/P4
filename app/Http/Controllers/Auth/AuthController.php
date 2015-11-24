@@ -23,6 +23,10 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    protected $redirectPath = '/';
+    protected $loginPath = '/login';
+    protected $redirectAfterLogout = '/';
+
     /**
      * Create a new authentication controller instance.
      *
@@ -30,7 +34,13 @@ class AuthController extends Controller
      */
     public function __construct()
     {
+        if (\Auth::check())
+            {
+                return redirect('/');
+            }
         $this->middleware('guest', ['except' => 'getLogout']);
+
+        
     }
 
     /**
