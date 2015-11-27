@@ -20,10 +20,25 @@ such as a page specific styesheets.
 <br>
 <h1>Joe's Sales Tracker Application - Home Page</h1>
 <br>
+<?php
+if (Session::has('message')) {
+    echo '<span class="msg">';
+    echo Session::get('message');
+    echo '</span>';
+    echo '<br>';
+}
+?>
 <hr class="homepage">
 <p>
     Welcome to the Sales Tracker!  Use the navigation Menu on the left to
     maintain the product catalog, add or update information for salespeople, and to log and view sales transactions.
+</p>
+<br>
+<br>
+<p>
+    Click <a class="" href="{{URL::to('/manual')}}"  target="_blank"><i class="fa fa-book"></i>&nbsp;here</a> to open a document that describes the system and explains how to use it.  Thanks
+    for trying out my application!
+</p>
 <hr class="homepage">
 
 @stop

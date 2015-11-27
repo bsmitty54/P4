@@ -30,7 +30,7 @@ such as a page specific styesheets.
     ?>
 
     <a class="button" href="{{ URL::to('/useredit/New/Add') }}"><i class="fa fa-plus"></i>&nbsp;Add New User</a>
-    <a class="button showfilter" onclick="showfilters()" href="#"><i class="fa fa-filter"></i>&nbsp;Filter Products List</a>
+    <a class="button showfilter" onclick="showfilters()" href="#"><i class="fa fa-filter"></i>&nbsp;Filter Users</a>
 
 </div>
 

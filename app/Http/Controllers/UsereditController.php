@@ -66,7 +66,7 @@ class UsereditController extends Controller {
             $pwd = $request->input('password');
             if (isset($pwd) && ($pwd != '')) {
                 $user->password = \Hash::make($request->input('password'));
-            } else {
+            } elseif ($mode == 'Add') {
                 $user->password = '';
             }
 
@@ -86,6 +86,11 @@ class UsereditController extends Controller {
         // now put the collection in the session variable
         $request->session()->put('users',$users);
         // now direct to the sort route to retain the sort the user had before editing
+        if (\Auth::user()->role == 'Administrator') {
+            return redirect('users/sort/' . $ucol);
+        } else {
+            return redirect('/');
+        }
         return redirect('users/sort/' . $ucol);
     }
 

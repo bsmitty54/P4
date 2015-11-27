@@ -58,6 +58,8 @@
                     <li><a class="" href="{{ action("ProductController@getIndex") }}"><i class="fa fa-tags"></i>&nbsp;Maintain Product Catalog</a></li>
                     <li><a class="" href="{{ action("SalespersonController@getIndex") }}"><i class="fa fa-users"></i>&nbsp;Maintain Sales People</a></li>
                     <li><a class="" href="{{ action("UserController@getIndex") }}"><i class="fa fa-user"></i>&nbsp;Maintain Users</a></li>
+                @else
+                    <li><a class="" href="{{ URL::to('/useredit') }}/{{ Auth::user()->id}}/Edit"><i class="fa fa-user-secret"></i>&nbsp;Update Profile</a></li>
                 @endif
                 <li><a class="" href="{{URL::to('/logout')}}"><i class="fa fa-lock"></i>&nbsp;Logout</a></li>
 

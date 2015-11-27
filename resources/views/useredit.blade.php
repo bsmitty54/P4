@@ -81,9 +81,12 @@ such as a page specific styesheets.
         <div>
             <label></label>
             <span class="msg-long">
-                If you enter a new password, you must confirm it.  If you leave the password and confirmation blank,
-                the previous password will be retained. If this is a new user and you leave the password blank,
-                the user will not be able to login.
+                If you enter a new password, you must confirm it exactly.  If you leave the password blank
+                for an existing user, the previous password will be retained.
+                @if (Auth::user()->role == 'Administrator')
+                    If this is a new user and you leave the password blank,
+                    the user will not be able to login.
+                @endif
             </span><br><br>
         </div>
 
@@ -102,15 +105,25 @@ such as a page specific styesheets.
         <div class="field">
             <label for='role'>Role:</label>
             <select id="role" name="role">
-                <option value="" disc="0">Select a Role</option>
-                <option value="End User" disc="0">End User</option>
-                <option value="Administrator" disc="0">Administrator</option>
+                @if (Auth::user()->role == 'End User')
+                    <option value="End User" disc="0">End User</option>
+                @else
+                    <option value="" disc="0">Select a Role</option>
+                    <option value="End User" disc="0">End User</option>
+                    <option value="Administrator" disc="0">Administrator</option>
+                @endif
             </select>
             <?php $errorDisplay->showError($errors,'role'); ?>
         </div>
 
         <br><br><label for="submit">&nbsp;</label>
-        <a class="formbutton" title="Back" alt="Back" href="{{URL::to('/users')}}">Cancel</a>
+
+        @if (Auth::user()->role == 'Administrator')
+            <a class="formbutton" title="Back" alt="Back" href="{{URL::to('/users')}}">Cancel</a>
+        @else
+            <a class="formbutton" title="Back" alt="Back" href="{{URL::to('/')}}">Cancel</a>
+        @endif
+
 
         @if ($mode == 'Delete')
             <button type="submit" id="submit" class="btn btn-primary">DELETE (permanent!)</button>

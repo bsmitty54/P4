@@ -39,6 +39,14 @@ such as a page specific styesheets.
             <?php $errorDisplay->showError($errors,'password'); ?>
         </div>
 
+    <!--
+        <div class="field">
+            <label for='remember'>Remember Me:</label>
+            <input type="checkbox" id="remember" name="remember">
+
+        </div>
+    -->
+
         <br><br><label for="submit">&nbsp;</label>
         <button type="submit" id="submit" class="btn btn-primary">Submit</button>
 

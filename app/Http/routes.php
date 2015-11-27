@@ -58,6 +58,15 @@ Route::post('/users/sort/{column}', 'UserController@sortUsers');
 Route::get('/useredit/{uid}/{mode}', 'UsereditController@getIndex');
 Route::post('/useredit/{uid}/{mode}', 'UsereditController@postIndex');
 
+Route::get('/manual', function() {
+    $filename = 'user_manual.pdf';
+    $path = public_path().DIRECTORY_SEPARATOR.'docs'.DIRECTORY_SEPARATOR.$filename;
+    return Response::make(file_get_contents($path), 200, [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'inline; '.$filename,
+    ]);
+});
+
 # Show login form
 Route::get('/login', 'Auth\AuthController@getLogin');
 
