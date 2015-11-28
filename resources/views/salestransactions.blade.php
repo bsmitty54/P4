@@ -39,6 +39,8 @@ such as a page specific styesheets.
 
     <a class="button" href="{{ URL::to('/salestransactionedit/New/Add') }}"><i class="fa fa-plus"></i>&nbsp;Add New Sale</a>
     <a class="button showfilter" onclick="showfilters()" href="#"><i class="fa fa-filter"></i>&nbsp;Filter Sales</a>
+    <a class="button" href="{{ URL::to('/salesreport') }}" target="_blank"><i class="fa fa-print"></i>&nbsp;Printable Version</a>
+
 
 
 </div>

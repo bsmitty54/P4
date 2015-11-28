@@ -23,6 +23,12 @@ class SalesTransactionController extends Controller {
         return view('salestransactions',['sortOrder' => 'transaction_date'], ['salestransactions' => $salestransactions]);
     }
 
+    public function getReport() {
+        //$html = \View::make('salesreport');
+        //return \PDF::loadHTML($html)->download('sales_report.pdf');
+        return view('salesreport');
+    }
+
     /**
      * Responds to requests to POST /books/create
      */

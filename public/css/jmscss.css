@@ -412,12 +412,12 @@ p.desc {
   color: blue;
 }
 
-div.tablelist tr {
+div.tablelist tr,div.reporttable tr {
     height: 20px;
     vertical-align: center;
 }
 
-div.tablelist th {
+div.tablelist th, div.reporttable th {
     border: solid black 1px;
     text-align: center;
     background-color: #DDFFFF;
@@ -425,7 +425,7 @@ div.tablelist th {
     max-height: 30px;
 }
 
-div.tablelist td {
+div.tablelist td, div.reporttable td {
     border: ridge gray 1px;
     border-radius: 1px;
     color: #2d2d86;
@@ -433,7 +433,7 @@ div.tablelist td {
     word-wrap:break-word;
 }
 
-div.tablelist td.rj {
+div.tablelist td.rj, div.reporttable td.rj {
     text-align: right;
 }
 
@@ -448,6 +448,12 @@ div.tablelist {
     overflow-y:scroll;
 }
 
+div.reporttable {
+    float:left;
+    width:100%;
+}
+
+
 div.record-count {
     clear: both;
     padding-top: 5px;
@@ -455,6 +461,12 @@ div.record-count {
 
 .masterlist {
     width: 100%;
+    table-layout:fixed;
+}
+
+.reportlist {
+    margin: 0px 10px 0px 10px;
+    width: 90%;
     table-layout:fixed;
 }
 
@@ -562,6 +574,12 @@ a.tooltip:hover::after {
     white-space:nowrap;
     top:17px;
     left: 0px;
+}
+
+span.big {
+    font-size:20px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 span.msg {

@@ -36,7 +36,7 @@ if (Session::has('message')) {
 <br>
 <br>
 <p>
-    Click <a class="" href="{{URL::to('/manual')}}"  target="_blank"><i class="fa fa-book"></i>&nbsp;here</a> to open a document that describes the system and explains how to use it.  Thanks
+    Click <span class="big"><a class="" href="{{URL::to('/manual')}}"  target="_blank"><i class="fa fa-book"></i>&nbsp;here</a></span> to open a document that describes the system and explains how to use it.  Thanks
     for trying out my application!
 </p>
 <hr class="homepage">
