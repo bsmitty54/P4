@@ -24,6 +24,12 @@ such as a page specific styesheets.
     <h2>Sales Report</h2>
 </div>
 
+<script>
+   $(document).ready(function(){
+       window.print();
+   });
+</script>
+
 <div class="reporttable">
 
     <table class="reportlist">
