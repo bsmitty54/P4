@@ -101,6 +101,7 @@ class SalesTransactionController extends Controller {
          // set the session variable to refelect the current sort
          $request->session()->put('txcol',$column);
          $request->session()->put('txord',$ord);
+         $request->session()->put('salestransactions',$salestransactions);
          return view('salestransactions', ['sortOrder' => $column], ['salestransactions' => $salestransactions]);
      }
 
