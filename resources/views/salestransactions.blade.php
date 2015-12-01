@@ -60,7 +60,7 @@ such as a page specific styesheets.
 </script>
 
 <div class="filters">
-    <br>
+    <br><br>
     <hr class="homepage">
     <form method="post" class="filterform" action="{{ url('/salestransactions')}}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">

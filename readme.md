@@ -11,8 +11,8 @@ a salespeople roster, and a history of sales transactions.  The application is b
 http://screencast.com/t/vhA75unpKC
 
 ## Details for teaching team
-Administrator login: jamal@harvard.edu / helloworld
-End User login: jill@harvard.edu / helloworld
+* Administrator login: jamal@harvard.edu / helloworld
+* End User login: jill@harvard.edu / helloworld
 
 ## Outside code
 * Bootstrap: http://getbootstrap.com/
