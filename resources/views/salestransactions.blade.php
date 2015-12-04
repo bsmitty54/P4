@@ -17,6 +17,9 @@ such as a page specific styesheets.
 
 
 @section('content')
+
+
+
 <div class="tablecap">
     <h2>Sales Transaction Maintenance</h2>
 

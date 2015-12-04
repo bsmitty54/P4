@@ -30,8 +30,9 @@ if (Session::has('message')) {
 ?>
 <hr class="homepage">
 <p>
-    Welcome to the Sales Tracker!  Use the navigation Menu on the left to
-    maintain the product catalog, add or update information for salespeople, and to log and view sales transactions.
+    Welcome to the Sales Tracker!  You must login to use the system.  If you do not have an account
+    please contact your system administrator.  After logging in, use the navigation Menu on the left to
+    maintain the product catalog, add or update information for salespeople, and to maintain sales transactions.
 </p>
 <br>
 <br>

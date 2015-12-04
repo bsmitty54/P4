@@ -16,6 +16,15 @@ such as a page specific styesheets.
 
 @section('content')
 
+<?php
+if (Session::has('login_message')) {
+    echo '<br><br>';
+    echo '<span class="msg">';
+    echo Session::get('login_message');
+    echo '</span>';
+    echo '<br>';
+}
+?>
 
 <br><br><br>
 <form method="POST" action="/login">
