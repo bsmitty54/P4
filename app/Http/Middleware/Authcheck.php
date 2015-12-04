@@ -15,7 +15,7 @@ class AuthCheck
      */
     public function handle($request, Closure $next, $role)
     {
-        $urole = \Auth::user()->role;
+        $urole = (auth()->check() ? \Auth::user()->role : '');
         if(auth()->check() && ($urole==$role || $urole=='Administrator')) {
             return $next($request);
         }
