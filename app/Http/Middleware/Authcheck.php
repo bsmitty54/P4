@@ -15,7 +15,8 @@ class AuthCheck
      */
     public function handle($request, Closure $next, $role)
     {
-        if(auth()->check() && \Auth::user()->role==$role){
+        $urole = \Auth::user()->role;
+        if(auth()->check() && ($urole==$role || $urole=='Administrator'){
             return $next($request);
         }
         \Session::flash('login_message','You must be logged in as an ' . $role . ' to access the requested page.');
