@@ -108,7 +108,10 @@ class SalesTransactionController extends Controller {
      public function postIndex(Request $request) {
 
          // first retrieve the transaction based on date - if no dates, get most recent 100 transactions
-
+         $this->validate($request, [
+             'fromDate' => 'date|before:tomorrow',
+             'thruDate' => 'date|after:fromDate',
+        ]);
          $fromDate = $request->input('fromDate');
          $thruDate = $request->input('thruDate');
          if ((is_null($fromDate) || ($fromDate == '')) && (is_null($thruDate) || ($thruDate == ''))) {

@@ -35,7 +35,7 @@ such as a page specific styesheets.
 
 <script>
     $(document).ready(function(){
-        
+
         setSalesDropDowns('product',{{ $product }});
         setSalesDropDowns('salesperson',{{ $salesperson }});
         updateDiscount();
@@ -64,7 +64,7 @@ such as a page specific styesheets.
         @inject('errorDisplay', '\App\Http\Controllers\SalestransactioneditController')
         <div class="field">
             <label for='transactionDate'>Transaction Date:</label>
-            <input type="date" id="transactionDate" name="transactionDate" placeholder="Date" size="15" maxlength="15" value="{{ $date }}" {{ $mode == 'Delete' ? 'readonly':''}} autofocus>
+            <input type="date" id="transactionDate" name="transactionDate" placeholder="Date" size="8" maxlength="8" value="{{ $date }}" {{ $mode == 'Delete' ? 'readonly':''}} max="2099-12-31" autofocus>
             <?php $errorDisplay->showError($errors,'transactionDate'); ?>
         </div>
         <div class="field">

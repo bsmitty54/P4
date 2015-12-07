@@ -8,7 +8,7 @@ Joe's Sales Tracker is a web application that allows authorized users to maintai
 a salespeople roster, and a history of sales transactions.  The application is built using HTML5, CSS, Javascipt, Bootstrap and Laravel / PHP.
 
 ## Demo
-http://screencast.com/t/vhA75unpKC
+http://screencast.com/t/mVb3WXJcWu3
 
 ## Details for teaching team
 * Administrator login: jamal@harvard.edu / helloworld

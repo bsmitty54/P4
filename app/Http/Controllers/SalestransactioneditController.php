@@ -46,7 +46,7 @@ class SalestransactioneditController extends Controller {
 
             // create a model and set the values, then session_save_path
             $this->validate($request, [
-                'transactionDate' => 'required|min:5',
+                'transactionDate' => 'required|date|before:tomorrow',
                 'product' => 'required',
                 'salesperson' => 'required',
                 'discount' => 'required|numeric|min:0',

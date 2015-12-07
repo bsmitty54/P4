@@ -69,11 +69,11 @@ such as a page specific styesheets.
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="field">
             <label for='fromDate'>From Date:</label>
-            <input type="date" id="fromDate" name="fromDate" placeholder="From Date" value="{{ $fromDate }}" }} autofocus>
+            <input type="date" id="fromDate" name="fromDate" placeholder="From Date" value="{{ $fromDate }}" }} autofocus max="2099-12-31">
         </div>
         <div class="field">
             <label for='thruDate'>Thru Date:</label>
-            <input type="date" id="thruDate" name="thruDate" placeholder="Thru Date" value="{{ $thruDate }}" }}>
+            <input type="date" id="thruDate" name="thruDate" placeholder="Thru Date" value="{{ $thruDate }}" autofocus max="2099-12-31"}}>
         </div>
         <div class="field">
             <label for='cat'>Category:</label>
