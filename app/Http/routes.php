@@ -59,6 +59,8 @@ Route::get('/users/sort/{column}', ['middleware' => 'authcheck:Administrator', '
 Route::post('/users/sort/{column}', ['middleware' => 'authcheck:Administrator', 'uses' =>'UserController@sortUsers']);
 Route::get('/useredit/{uid}/{mode}', ['middleware' => 'authcheck:Administrator', 'uses' =>'UsereditController@getIndex']);
 Route::post('/useredit/{uid}/{mode}', ['middleware' => 'authcheck:Administrator', 'uses' =>'UsereditController@postIndex']);
+Route::get('/dashboard',['middleware' => 'authcheck:End User', 'uses' =>'SalesTransactionController@getDashboard']);
+Route::post('/dashboard',['middleware' => 'authcheck:End User', 'uses' =>'SalesTransactionController@postDashboard']);
 
 Route::get('/manual', function() {
     $filename = 'user_manual.pdf';

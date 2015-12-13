@@ -12,6 +12,7 @@
     <link href="/css/jmscss.css" type='text/css' rel='stylesheet'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/jss.js"></script>
 
@@ -54,6 +55,7 @@
             @else
                 <li><a class="" href="{{URL::to('/')}}"><i class="fa fa-home"></i>&nbsp;Home</a></li>
                 <li><a class="" href="{{ action("SalesTransactionController@getIndex") }}"><i class="fa fa-dollar"></i>&nbsp;Maintain Sales Transactions</a></li>
+                <li><a class="" href="{{ action("SalesTransactionController@getDashboard") }}"><i class="fa fa-dashboard"></i>&nbsp;Sales Dashboard</a></li>
                 @if(Auth::user()->role == 'Administrator')
                     <li><a class="" href="{{ action("ProductController@getIndex") }}"><i class="fa fa-tags"></i>&nbsp;Maintain Product Catalog</a></li>
                     <li><a class="" href="{{ action("SalespersonController@getIndex") }}"><i class="fa fa-users"></i>&nbsp;Maintain Sales People</a></li>

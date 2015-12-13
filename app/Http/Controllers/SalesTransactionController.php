@@ -29,6 +29,71 @@ class SalesTransactionController extends Controller {
         return view('salesreport');
     }
 
+    public function getDashboard() {
+        $graphdata = array();
+        $query = '';
+        $stat = 'Quantity';
+        return view('salesdashboard')->with('graphdata',$graphdata)->with('grouping','Product')->with('period','Month To Date')->with('chart','pie')->with('query',$query)->with('stat',$stat);
+    }
+
+    public function postDashboard(Request $request) {
+        // first load the stats from the database based on user input
+        $graphdata = array();
+        $period = $request->input('period');
+        $grouping = $request->input('grouping');
+        $chart = $request->input('chart');
+        $stat = $request->input('stat');
+        $query = 'SELECT ';
+        if($grouping == 'Product') {
+            $query = $query . "products.product_name as 'Group',";
+        } elseif ($grouping == 'Category') {
+            $query = $query . "categories.category_name as 'Group',";
+        } else {
+            $query = $query . "CONCAT(salespeople.last_name,', ',salespeople.first_name) as 'Group',";
+        }
+        $query = $query . "sum(quantity) as 'Quantity',";
+        $query = $query . "sum(products.price * quantity) as 'Dollars' ";
+        $query = $query . "FROM sales_transactions ";
+        if($grouping == 'Product') {
+            $query = $query . "INNER JOIN products ON sales_transactions.product_id = products.id ";
+            $query = $query . "GROUP BY product_name";
+        } elseif ($grouping == 'Category') {
+            $query = $query . "INNER JOIN products ON sales_transactions.product_id = products.id ";
+            $query = $query . "INNER JOIN categories ON products.category_id = categories.id ";
+            $query = $query . "GROUP BY categories.category_name";
+        } else {
+            $query = $query . "INNER JOIN salespeople ON sales_transactions.salesperson_id = salespeople.id ";
+            $query = $query . "INNER JOIN products ON sales_transactions.product_id = products.id ";
+            $query = $query . "GROUP BY CONCAT(salespeople.last_name,', ',salespeople.first_name)";
+        }
+        if($stat == 'Quantity') {
+            $query = $query . " ORDER BY sum(quantity) DESC";
+        } else {
+            $query = $query . " ORDER BY sum(products.price * quantity) DESC";
+        }
+
+        $graphdata = \DB::select($query);
+
+        // if the result set has more than 10 rows, need to group the results in 10 and higher into category of "other"
+        if (count($graphdata) > 10) {
+            $graphdata2 = new \Illuminate\Database\Eloquent\Collection;
+            for ($i=0; $i<10; $i++) {
+                $graphdata2[$i] = $graphdata[$i];
+            }
+            $qty = 0;
+            $dol = 0;
+            for ($i=10; $i<count($graphdata); $i++) {
+                $qty = $qty + $graphdata[$i]->Quantity;
+                $dol = $dol + $graphdata[$i]->Dollars;
+            }
+
+            $graphdata2->add(['Group'=>'Other','Quantity'=>$qty,'Dollars'=>$dol]);
+            $graphdata = $graphdata2;
+        }
+
+        return view('salesdashboard')->with('graphdata',$graphdata)->with('grouping',$grouping)->with('period',$period)->with('chart',$chart)->with('query',$query)->with('stat',$stat);
+    }
+
     /**
      * Responds to requests to POST /books/create
      */
