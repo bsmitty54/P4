@@ -28,3 +28,42 @@ function updateMaxDate() {
 
     // alert(discount);
 }
+
+function updateDates() {
+    var period = document.querySelector('input[name = "period"]:checked').value;
+    //var period = document.getElementById("period").value;
+    
+    if (period == 'Month To Date') {
+        var now = new Date();
+        var tdate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+        var fdate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-01';
+        $("#thruDate").val(tdate);
+        $("#fromDate").val(fdate);
+    }
+    if (period == 'Year To Date') {
+        //alert(document.getElementById("thruDate").value);
+        var now = new Date();
+        var tdate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+        var fdate = now.getFullYear() + '-01-01';
+        $("#thruDate").val(tdate);
+        $("#fromDate").val(fdate);
+    }
+    if (period == 'Last 30 Days') {
+        var now = new Date();
+        var pdt = new Date();
+        pdt.setDate(pdt.getDate() - 30);
+        var tdate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+        var fdate = pdt.getFullYear() + '-' + (pdt.getMonth() + 1) + '-' + pdt.getDate();
+        $("#thruDate").val(tdate);
+        $("#fromDate").val(fdate);
+    }
+    if (period == 'Last 60 Days') {
+        var now = new Date();
+        var pdt = new Date();
+        pdt.setDate(pdt.getDate() - 60);
+        var tdate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+        var fdate = pdt.getFullYear() + '-' + (pdt.getMonth() + 1) + '-' + pdt.getDate();
+        $("#thruDate").val(tdate);
+        $("#fromDate").val(fdate);
+    }
+}

@@ -32,8 +32,11 @@ class SalesTransactionController extends Controller {
     public function getDashboard() {
         $graphdata = array();
         $query = '';
+        $other = '';
         $stat = 'Quantity';
-        return view('salesdashboard')->with('graphdata',$graphdata)->with('grouping','Product')->with('period','Month To Date')->with('chart','pie')->with('query',$query)->with('stat',$stat);
+        $fromDate = '';
+        $thruDate = '';
+        return view('salesdashboard')->with('graphdata',$graphdata)->with('grouping','Product')->with('period','Month To Date')->with('chart','pie')->with('query',$query)->with('stat',$stat)->with('other',$other)->with('fromDate',$fromDate)->with('thruDate',$thruDate);
     }
 
     public function postDashboard(Request $request) {
@@ -43,6 +46,8 @@ class SalesTransactionController extends Controller {
         $grouping = $request->input('grouping');
         $chart = $request->input('chart');
         $stat = $request->input('stat');
+        $fromDate = $request->input('fromDate');
+        $thruDate = $request->input('thruDate');
         $query = 'SELECT ';
         if($grouping == 'Product') {
             $query = $query . "products.product_name as 'Group',";
@@ -56,14 +61,17 @@ class SalesTransactionController extends Controller {
         $query = $query . "FROM sales_transactions ";
         if($grouping == 'Product') {
             $query = $query . "INNER JOIN products ON sales_transactions.product_id = products.id ";
+            $query = $query . " WHERE transaction_date between '" . $fromDate . "' and '" . $thruDate . "' ";
             $query = $query . "GROUP BY product_name";
         } elseif ($grouping == 'Category') {
             $query = $query . "INNER JOIN products ON sales_transactions.product_id = products.id ";
             $query = $query . "INNER JOIN categories ON products.category_id = categories.id ";
+            $query = $query . " WHERE transaction_date between '" . $fromDate . "' and '" . $thruDate . "' ";
             $query = $query . "GROUP BY categories.category_name";
         } else {
             $query = $query . "INNER JOIN salespeople ON sales_transactions.salesperson_id = salespeople.id ";
             $query = $query . "INNER JOIN products ON sales_transactions.product_id = products.id ";
+            $query = $query . " WHERE transaction_date between '" . $fromDate . "' and '" . $thruDate . "' ";
             $query = $query . "GROUP BY CONCAT(salespeople.last_name,', ',salespeople.first_name)";
         }
         if($stat == 'Quantity') {
@@ -72,9 +80,11 @@ class SalesTransactionController extends Controller {
             $query = $query . " ORDER BY sum(products.price * quantity) DESC";
         }
 
+
         $graphdata = \DB::select($query);
 
         // if the result set has more than 10 rows, need to group the results in 10 and higher into category of "other"
+        $other = array();
         if (count($graphdata) > 10) {
             $graphdata2 = new \Illuminate\Database\Eloquent\Collection;
             for ($i=0; $i<10; $i++) {
@@ -87,11 +97,11 @@ class SalesTransactionController extends Controller {
                 $dol = $dol + $graphdata[$i]->Dollars;
             }
 
-            $graphdata2->add(['Group'=>'Other','Quantity'=>$qty,'Dollars'=>$dol]);
+            $other = \DB::select("SELECT 'Other' as 'Group'," . $qty . " as 'Quantity'," . $dol . " as 'Dollars' FROM sales_transactions where id=1");
             $graphdata = $graphdata2;
         }
 
-        return view('salesdashboard')->with('graphdata',$graphdata)->with('grouping',$grouping)->with('period',$period)->with('chart',$chart)->with('query',$query)->with('stat',$stat);
+        return view('salesdashboard')->with('graphdata',$graphdata)->with('grouping',$grouping)->with('period',$period)->with('chart',$chart)->with('query',$query)->with('stat',$stat)->with('other',$other)->with('fromDate',$fromDate)->with('thruDate',$thruDate);
     }
 
     /**

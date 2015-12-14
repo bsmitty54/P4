@@ -32,9 +32,8 @@ such as a page specific styesheets.
 @endif
 
 
-
 <div class="filters">
-    <br><br>
+    <br>
     <hr class="homepage">
     <form method="post" class="filterform" action="{{ url('/dashboard')}}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -44,18 +43,28 @@ such as a page specific styesheets.
         <input type="radio" name="grouping" id="Product" value="Product" {{ $grouping == 'Product' ? 'checked' : ''}} required> Product
         <input type="radio" name="grouping" id="Category" value="Category" {{ $grouping == 'Category' ? 'checked' : ''}} required> Category
         <input type="radio" name="grouping" id="Salesperson" value="Salesperson" {{ $grouping == 'Salesperson' ? 'checked' : ''}} required> Salesperson
-        <br><br>
+        <br>
         <label>Time Period:</label>
-        <input type="radio" name="period" id="Month-to-Date" value="Month To Date" {{ $period == 'Month To Date' ? 'checked' : ''}} required> Month-to-Date
-        <input type="radio" name="period" id="Year-to-Date" value="Year To Date" {{ $period == 'Year To Date' ? 'checked' : ''}} required> Year-to-Date
-        <input type="radio" name="period" id="Last 30 days" value="Last 30 Days" {{ $period == 'Last 30 Days' ? 'checked' : ''}} required> Last 30 Days
+        <input type="radio" onClick="updateDates();" name="period" id="Month To Date" value="Month To Date" {{ $period == 'Month To Date' ? 'checked' : ''}} required> Month-to-Date
+        <input type="radio" onClick="updateDates();" name="period" id="Year To Date" value="Year To Date" {{ $period == 'Year To Date' ? 'checked' : ''}} required> Year-to-Date
+        <input type="radio" onClick="updateDates();" name="period" id="Last 30 days" value="Last 30 Days" {{ $period == 'Last 30 Days' ? 'checked' : ''}} required> Last 30 Days
+        <input type="radio" onClick="updateDates();" name="period" id="Last 60 days" value="Last 60 Days" {{ $period == 'Last 60 Days' ? 'checked' : ''}} required> Last 60 Days
         <br><br>
+        <div class="field">
+            <label for='fromDate'>From Date:</label>
+            <input type="date" id="fromDate" name="fromDate" placeholder="From Date" value="{{ $fromDate }}" }} required max="2099-12-31">
+        </div>
+        <div class="field">
+            <label for='thruDate'>Thru Date:</label>
+            <input type="date" id="thruDate" name="thruDate" placeholder="Thru Date" value="{{ $thruDate }}" required max="2099-12-31"}}>
+        </div>
+        <br>
         <label>Chart Type:</label>
         <input type="radio" name="chart" id="pie" value="pie" {{ $chart == 'pie' ? 'checked' : ''}} required> Pie Chart
         <input type="radio" name="chart" id="bar" value="bar" {{ $chart == 'bar' ? 'checked' : ''}} required> Bar Chart
         <input type="radio" name="chart" id="column" value="column" {{ $chart == 'column' ? 'checked' : ''}} required> Column Chart
         <input type="radio" name="chart" id="line" value="line" {{ $chart == 'line' ? 'checked' : ''}} required> Line Chart
-        <br><br>
+        <br>
         <label>Select Which Stat to Show:</label>
         <input type="radio" name="stat" id="Quantity" value="Quantity" {{ $stat == 'Quantity' ? 'checked' : ''}} required> Quantity Sold
         <input type="radio" name="stat" id="Dollars" value="Dollars" {{ $stat == 'Dollars' ? 'checked' : ''}} required> Dollars
@@ -64,7 +73,7 @@ such as a page specific styesheets.
         @if ($query != '')
             <a class="formbutton" onclick="hidefilters()" title="Back" alt="Back" href="#">Cancel</a>
         @endif
-        <button onclick="hidefilters()" type="submit" id="submit" class="btn btn-primary showfilter">Apply</button>
+        <button onclick="" type="submit" id="submit" class="btn btn-primary showfilter">Apply</button>
     </form>
     <hr class="homepage">
 </div>
@@ -77,23 +86,95 @@ Query: {{$query}}
 
 <div id="container" style="width:100%; height:400px;"></div>
 
+
 @if ($query != '')
     <script>
 
     $(function () {
         $('#container').highcharts({
             chart: {
-                type: '{{ $chart }}'
+                type: '{{ $chart }}',
+                options3d: {
+                    enabled: true,
+                    alpha: 15
+                }
             },
-            <?php $title = $period . " Sales Grouped By " . $grouping; ?>
+            <?php $title = "Sales From " . $fromDate . " thru " . $thruDate . " Grouped By " . $grouping; ?>
             title: {
                 text: '{{ $title }}'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    innerSize: 100,
+                    depth: 45,
+                    dataLabels: {
+                        enabled: true,
+                        @if ($stat == 'Quantity')
+                            format: '<b>{point.name}</b>: {point.y:,.0f}',
+                        @else
+                            format: '<b>{point.name}</b>: {point.y:,.2f}',
+                        @endif
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                },
+                bar: {
+                    dataLabels: {
+                        enabled: true,
+                        @if ($stat == 'Quantity')
+                            format: '{point.y:,.0f}',
+                        @else
+                            format: '{point.y:,.2f}',
+                        @endif
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                },
+                column: {
+                    dataLabels: {
+                        enabled: true,
+                        @if ($stat == 'Quantity')
+                            format: '{point.y:,.0f}',
+                        @else
+                            format: '{point.y:,.2f}',
+                        @endif
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                },
+                line: {
+                    dataLabels: {
+                        enabled: true,
+                        @if ($stat == 'Quantity')
+                            format: '{point.y:,.0f}',
+                        @else
+                            format: '{point.y:,.2f}',
+                        @endif
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                },
+                datalabels: {
+                    enabled: true,
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
             },
             xAxis: {
                 categories: [
                     @foreach($graphdata as $gd)
                         '{{$gd->Group}}',
-                        @endforeach
+                    @endforeach
+                    @foreach($other as $gd)
+                        '{{$gd->Group}}',
+                    @endforeach
                     ]
                 },
             yAxis: {
@@ -117,6 +198,16 @@ Query: {{$query}}
                             @endif
                         },
                         @endforeach
+                        @foreach($other as $gd)
+                        {
+                            name:'{{$gd->Group}}',
+                            @if ($stat=='Quantity')
+                                y:{{$gd->Quantity}}
+                            @else
+                                y:{{$gd->Dollars}}
+                            @endif
+                        },
+                        @endforeach
                     ]}]
             @else
                 [
@@ -126,7 +217,10 @@ Query: {{$query}}
                         data: [
                             @foreach($graphdata as $gd)
                                 {{$gd->Quantity}},
-                                @endforeach
+                            @endforeach
+                            @foreach($other as $gd)
+                                {{$gd->Quantity}},
+                            @endforeach
                             ]
                         }
                     @else
@@ -135,7 +229,10 @@ Query: {{$query}}
                         data: [
                             @foreach($graphdata as $gd)
                                 {{$gd->Dollars}},
-                                @endforeach
+                            @endforeach
+                            @foreach($other as $gd)
+                                {{$gd->Dollars}},
+                            @endforeach
                             ]
                         }
                     @endif

@@ -18,3 +18,4 @@ http://screencast.com/t/mVb3WXJcWu3
 * Bootstrap: http://getbootstrap.com/
 * fzaninotto/faker: https://packagist.org/packages/fzaninotto/faker
 * Laravel Framework: http://laravel.com
+* Highcharts javascript library: http://highcharts.com
