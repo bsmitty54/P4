@@ -23,6 +23,7 @@ such as a page specific styesheets.
 </div>
 @if($query != '')
     <a class="button showfilter" onclick="showfilters()" href="#"><i class="fa fa-filter"></i>&nbsp;Enter Graph Parameters</a>
+    <br>
 @else
     <script>
         $(document).ready(function(){
