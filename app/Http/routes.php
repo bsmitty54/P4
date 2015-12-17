@@ -53,12 +53,12 @@ Route::post('/salestransactions/sort/{column}', ['middleware' => 'authcheck:End 
 Route::get('/salestransactionedit/{txid}/{mode}', ['middleware' => 'authcheck:End User', 'uses' =>'SalestransactioneditController@getIndex']);
 Route::post('/salestransactionedit/{txid}/{mode}', ['middleware' => 'authcheck:End User', 'uses' =>'SalestransactioneditController@postIndex']);
 Route::get('/salesreport', ['middleware' => 'authcheck:End User', 'uses' =>'SalesTransactionController@getReport']);
-Route::get('/users', ['middleware' => 'authcheck:End User', 'uses' =>'UserController@getIndex']);
-Route::post('/users', ['middleware' => 'authcheck:End User', 'uses' =>'UserController@postIndex']);
+Route::get('/users', ['middleware' => 'authcheck:Administrator', 'uses' =>'UserController@getIndex']);
+Route::post('/users', ['middleware' => 'authcheck:Administrator', 'uses' =>'UserController@postIndex']);
 Route::get('/users/sort/{column}', ['middleware' => 'authcheck:Administrator', 'uses' =>'UserController@sortUsers']);
 Route::post('/users/sort/{column}', ['middleware' => 'authcheck:Administrator', 'uses' =>'UserController@sortUsers']);
-Route::get('/useredit/{uid}/{mode}', ['middleware' => 'authcheck:Administrator', 'uses' =>'UsereditController@getIndex']);
-Route::post('/useredit/{uid}/{mode}', ['middleware' => 'authcheck:Administrator', 'uses' =>'UsereditController@postIndex']);
+Route::get('/useredit/{uid}/{mode}', ['middleware' => 'authcheck:End User', 'uses' =>'UsereditController@getIndex']);
+Route::post('/useredit/{uid}/{mode}', ['middleware' => 'authcheck:End User', 'uses' =>'UsereditController@postIndex']);
 Route::get('/dashboard',['middleware' => 'authcheck:End User', 'uses' =>'SalesTransactionController@getDashboard']);
 Route::post('/dashboard',['middleware' => 'authcheck:End User', 'uses' =>'SalesTransactionController@postDashboard']);
 
