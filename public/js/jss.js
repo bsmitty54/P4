@@ -32,18 +32,29 @@ function updateMaxDate() {
 function updateDates() {
     var period = document.querySelector('input[name = "period"]:checked').value;
     //var period = document.getElementById("period").value;
-    
+    var now = new Date();
+    var mnth = now.getMonth() + 1;
+    mnth = mnth.toString();
+    if (mnth.length == 1) {
+      mnth = "0" + mnth;
+    }
+    var tday = now.getDate();
+    tday = tday.toString();
+    if (tday.length == 1) {
+      tday = "0" + tday;
+    }
+    //alert(tday);
     if (period == 'Month To Date') {
         var now = new Date();
-        var tdate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
-        var fdate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-01';
+        var tdate = now.getFullYear() + '-' + (mnth) + '-' + (tday);
+        var fdate = now.getFullYear() + '-' + (mnth) + '-01';
         $("#thruDate").val(tdate);
         $("#fromDate").val(fdate);
     }
     if (period == 'Year To Date') {
         //alert(document.getElementById("thruDate").value);
         var now = new Date();
-        var tdate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+        var tdate = now.getFullYear() + '-' + (mnth) + '-' + (tday);
         var fdate = now.getFullYear() + '-01-01';
         $("#thruDate").val(tdate);
         $("#fromDate").val(fdate);
@@ -52,8 +63,19 @@ function updateDates() {
         var now = new Date();
         var pdt = new Date();
         pdt.setDate(pdt.getDate() - 30);
-        var tdate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
-        var fdate = pdt.getFullYear() + '-' + (pdt.getMonth() + 1) + '-' + pdt.getDate();
+        var pmnth = pdt.getMonth() + 1;
+        pmnth = pmnth.toString();
+        if (pmnth.length == 1) {
+          pmnth = "0" + pmnth;
+        }
+        var pday = pdt.getDate();
+        pday = pday.toString();
+        if (pday.length == 1) {
+          pday = "0" + pday;
+        }
+        //alert(pdt + ' ' + pmnth);
+        var tdate = now.getFullYear() + '-' + (mnth) + '-' + (tday);
+        var fdate = pdt.getFullYear() + '-' + (pmnth) + '-' + (pday);
         $("#thruDate").val(tdate);
         $("#fromDate").val(fdate);
     }
@@ -61,8 +83,19 @@ function updateDates() {
         var now = new Date();
         var pdt = new Date();
         pdt.setDate(pdt.getDate() - 60);
-        var tdate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
-        var fdate = pdt.getFullYear() + '-' + (pdt.getMonth() + 1) + '-' + pdt.getDate();
+        pdt.setDate(pdt.getDate() - 30);
+        var pmnth = pdt.getMonth() + 1;
+        pmnth = pmnth.toString();
+        if (pmnth.length == 1) {
+          pmnth = "0" + pmnth;
+        }
+        var pday = pdt.getDate();
+        pday = pday.toString();
+        if (pday.length == 1) {
+          pday = "0" + pday;
+        }
+        var tdate = now.getFullYear() + '-' + (mnth) + '-' + (tday);
+        var fdate = pdt.getFullYear() + '-' + (pmnth) + '-' + (pday);
         $("#thruDate").val(tdate);
         $("#fromDate").val(fdate);
     }
